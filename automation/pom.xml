@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>admin-ui-automation</groupId>
   <artifactId>admin-ui-automation</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.2.0-prerel</version>
   <name>admin-ui-automation</name>
   <description>admin-ui-automation</description>
   <properties>
