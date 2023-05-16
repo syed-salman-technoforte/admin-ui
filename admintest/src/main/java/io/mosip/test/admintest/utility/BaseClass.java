@@ -58,25 +58,28 @@ public class BaseClass {
 	public void setUp() throws InterruptedException {
 		System.out.println(System.getProperty("user.dir"));
 		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", configFilePath);
-		
-//		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("--headless");
-//		driver = new ChromeDriver(options);
-		
-		
-		
-		driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", configFilePath);	
+		ChromeOptions options = new ChromeOptions();
+		try {
+			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+			if(headless.equalsIgnoreCase("yes")) {
+				options.addArguments("--headless=new");
+			}
+		} catch (Exception e1) {
+			
+			e1.printStackTrace();
+		}
+		 
+		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get(envPath);
 		driver.manage().window().maximize();
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		//driver.findElement(By.linkText("Admin")).click();
+		
 		String language1 = null;
 		try {
-			//String loginlang = JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
 			language1 = Commons.getFieldData("langcode");
 
 			System.out.println(language1);
@@ -85,12 +88,7 @@ public class BaseClass {
 			String var = "//li/a[contains(text(),'" + language1 + "')]";
 			Commons.click(driver, By.xpath(var));
 			}
-//			
-//			if(!language1.equals("sin"))
-//			{Commons.click(driver, By.xpath("//*[@class='kc-dropdown']"));
-//			String var = "//*[@class='kc-dropdown-item']/a[contains(text(),'" + language1 + "')]";
-//			Commons.click(driver, By.xpath(var));
-//			}
+
 		} catch (Exception e) {
 			e.getMessage();
 		}
