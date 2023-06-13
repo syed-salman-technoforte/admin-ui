@@ -199,8 +199,19 @@
 
 <!-- you still need to have a dependency for preferred version of
   Selenium/WebDriver. That should be 3.3.1 or above -->
+  <dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.0.9</version>
+</dependency>
   
-  
+  <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.2.0</version>
+</dependency>
+
      <dependency>
         <groupId>org.testng</groupId>
         <artifactId>testng</artifactId>

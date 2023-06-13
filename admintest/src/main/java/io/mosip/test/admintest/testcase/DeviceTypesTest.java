@@ -23,6 +23,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import io.mosip.test.admintest.utility.BaseClass;
 import io.mosip.test.admintest.utility.Commons;
 
@@ -31,27 +33,31 @@ public class DeviceTypesTest extends BaseClass{
   @Test(groups = "DT" )
   public void deviceTypesCRUD() {
 	  String deviceTypes="admin/masterdata/device-types/view";
-    Commons.click(driver,By.xpath("//a[@href='#/admin/masterdata']"));
+	  test=extent.createTest("DeviceTypesTest", "verify Login");
+    Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));
    
-    Commons.click(driver,By.id(deviceTypes));
-    Commons.click(driver,By.id("Create"));
+    Commons.click(test,driver,By.id(deviceTypes));
+    Commons.click(test,driver,By.id("Create"));
+    test.log(Status.INFO, "Click on Create");
  
 
-    Commons.enter(driver,By.id("code"),data);
-    Commons.enter(driver,By.id("name"),data);
-    Commons.enter(driver,By.id("description"),data);
+    Commons.enter(test,driver,By.id("code"),data);
+    Commons.enter(test,driver,By.id("name"),data);
+    Commons.enter(test,driver,By.id("description"),data);
   
-    Commons.create(driver);
-   	Commons.filter(driver, By.id("name"), data);
+    Commons.create(test,driver);
+   	Commons.filter(test,driver, By.id("name"), data);
    	
 
-   	Commons.edit(driver,data+1,By.id("name"));
-   	Commons.filter(driver, By.id("name"), data+1);
+   	Commons.edit(test,driver,data+1,By.id("name"));
+   	test.log(Status.INFO, "Click on Edit");
+   	Commons.filter(test,driver, By.id("name"), data+1);
    	
-   	Commons.activate(driver);
-   	Commons.edit(driver,data+2,By.id("name"));
-   	Commons.filter(driver, By.id("name"), data+2);
-   	Commons.deactivate(driver);
-
+   	Commons.activate(test,driver);
+   	test.log(Status.INFO, "Click on Active");
+   	Commons.edit(test,driver,data+2,By.id("name"));
+   	Commons.filter(test,driver, By.id("name"), data+2);
+   	Commons.deactivate(test,driver);
+   	test.log(Status.INFO, "Click on Deactive");
        }
    }

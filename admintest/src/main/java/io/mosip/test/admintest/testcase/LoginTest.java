@@ -48,62 +48,62 @@ public class LoginTest extends BaseClass{
 		e.printStackTrace();
 	}
     
-    Commons.click(driver,By.xpath("//*[@class='kc-dropdown']"));
+    Commons.click(test,driver,By.xpath("//*[@class='kc-dropdown']"));
     String var="//*[@class='kc-dropdown-item']/a[contains(text(),'"+language+"')]";
-    Commons.click(driver,By.xpath(var));
+    Commons.click(test,driver,By.xpath(var));
     driver.findElement(By.id("username")).sendKeys(userid);
     driver.findElement(By.id("password")).sendKeys(password);
     driver.findElement(By.xpath("//input[@name=\'login\']")).click();
  
     /*
-    Commons.click(driver,By.xpath("//a[@href='#/admin/masterdata']"));
+    Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));
    
-    Commons.click(driver,By.xpath("//mat-card-content/span[contains(text(),'Blocklisted Words')]"));
-    Commons.click(driver,By.xpath("//span[contains(text(),'Create')]"));
+    Commons.click(test,driver,By.xpath("//mat-card-content/span[contains(text(),'Blocklisted Words')]"));
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Create')]"));
     String data=Commons.appendDate;
   
-    Commons.enter(driver,By.xpath("//input[@placeholder='Blocklisted Words']"),data);
-    Commons.enter(driver,By.xpath("//textarea[@placeholder='Description']"),data);
+    Commons.enter(test,driver,By.xpath("//input[@placeholder='Blocklisted Words']"),data);
+    Commons.enter(test,driver,By.xpath("//textarea[@placeholder='Description']"),data);
     
  
-    Commons.click(driver,By.xpath("//button[@id='createButton']"));
-    Commons.click(driver,By.xpath("//span[contains(text(),'OK')]")); 
+    Commons.click(test,driver,By.xpath("//button[@id='createButton']"));
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'OK')]")); 
     
-    Commons.click(driver,By.xpath("//span[contains(text(),'Filter')]")); 
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Filter')]")); 
    
-    Commons.enter(driver,By.xpath("//input[@placeholder=' Blocklisted Words']"),data);
+    Commons.enter(test,driver,By.xpath("//input[@placeholder=' Blocklisted Words']"),data);
 
-    Commons.click(driver,By.xpath("//span[contains(text(),'Apply')]")); 
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Apply')]")); 
     
-    Commons.click(driver,By.cssSelector(".ellipsis-button"));
+    Commons.click(test,driver,By.cssSelector(".ellipsis-button"));
     
     
-    Commons.click(driver,By.xpath("//span[contains(text(),'Activate')]"));
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Activate')]"));
 
-    Commons.click(driver,By.xpath("//span[contains(text(),'Confirm')]"));
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Confirm')]"));
 
-    Commons.click(driver,By.xpath("//span[contains(text(),'Done')]"));    
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Done')]"));    
     
    driver.findElement(By.cssSelector(".ellipsis-button")).click();
     
-    Commons.click(driver,By.xpath("//span[contains(text(),'Edit')]"));    
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Edit')]"));    
 
     Assert.assertNotEquals(data, driver.findElement(By.xpath("//input[@placeholder='Blocklisted Words']")).getText());
     driver.findElement(By.xpath("//input[@placeholder='Blocklisted Words']")).clear();
     
-    Commons.enter(driver,By.xpath("//input[@placeholder='Blocklisted Words']"),data+1);
+    Commons.enter(test,driver,By.xpath("//input[@placeholder='Blocklisted Words']"),data+1);
     
-    Commons.click(driver,By.id("createButton")); 
+    Commons.click(test,driver,By.id("createButton")); 
 
 
-    Commons.click(driver,By.xpath("//button/span[contains(text(),'OK')]")); 
+    Commons.click(test,driver,By.xpath("//button/span[contains(text(),'OK')]")); 
 
-    Commons.click(driver,By.xpath("//span[contains(text(),'Filter')]")); 
-    Commons.enter(driver,By.xpath("//input[@placeholder='Blocklisted Words']"),data+1);
-     Commons.click(driver,By.xpath("//span[contains(text(),'Apply')]")); 
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Filter')]")); 
+    Commons.enter(test,driver,By.xpath("//input[@placeholder='Blocklisted Words']"),data+1);
+     Commons.click(test,driver,By.xpath("//span[contains(text(),'Apply')]")); 
     
-    Commons.click(driver,By.cssSelector(".ellipsis-button"));
-    Commons.click(driver,By.xpath("//span[contains(text(),'Deactivate')]"));
+    Commons.click(test,driver,By.cssSelector(".ellipsis-button"));
+    Commons.click(test,driver,By.xpath("//span[contains(text(),'Deactivate')]"));
     
     Commons.clickSpan(driver,"Confirm");
     Commons.clickSpan(driver,"Done");

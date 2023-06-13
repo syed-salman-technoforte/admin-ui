@@ -34,6 +34,12 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -48,29 +54,50 @@ public class BaseClass {
 	protected String userid = System.getProperty("userid");
 	protected String password = System.getProperty("password");
 	protected String data = Commons.appendDate;
-
+	public static ExtentSparkReporter html;
+    public static    ExtentReports extent;
+    public static    ExtentTest test;
 
 	public void setLangcode(String langcode) throws Exception {
 		this.langcode = Commons.getFieldData("langcode");
 	}
 
+  @BeforeMethod
+    public void set() {
+        extent=ExtentReportManager.getReports();
+  }
+  
 	@BeforeMethod
-	public void setUp() throws InterruptedException {
-		System.out.println(System.getProperty("user.dir"));
-		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
-		System.setProperty("webdriver.chrome.driver", configFilePath);	
+	public void setUp() throws Exception {
+		
+		
 		ChromeOptions options = new ChromeOptions();
-		try {
-			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-			if(headless.equalsIgnoreCase("yes")) {
-				options.addArguments("--headless=new");
-			}
-		} catch (Exception e1) {
-			
-			e1.printStackTrace();
+		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		
+	//System.out.println(WebDriverManager.getInstance().getBrowserPath());
+//		options.addArguments("no-sandbox");
+//		options.addArguments("disable-gpu");
+		if(headless.equalsIgnoreCase("yes")) {
+			options.addArguments("--headless=new");
 		}
-		 
-		driver = new ChromeDriver(options);
+		WebDriverManager.chromedriver().setup();
+		driver=new ChromeDriver(options);
+		
+//		System.out.println(System.getProperty("user.dir"));
+//		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
+//		System.setProperty("webdriver.chrome.driver", configFilePath);	
+//		ChromeOptions options = new ChromeOptions();
+//		try {
+//			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+//			if(headless.equalsIgnoreCase("yes")) {
+//				options.addArguments("--headless=new");
+//			}
+//		} catch (Exception e1) {
+//			
+//			e1.printStackTrace();
+//		}
+//		 
+//		driver = new ChromeDriver(options);
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get(envPath);
@@ -84,9 +111,9 @@ public class BaseClass {
 
 			System.out.println(language1);
 			if(!language1.equals("sin"))
-			{Commons.click(driver, By.xpath("//*[@id='kc-locale-dropdown']"));
+			{Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
 			String var = "//li/a[contains(text(),'" + language1 + "')]";
-			Commons.click(driver, By.xpath(var));
+			Commons.click(test,driver, By.xpath(var));
 			}
 
 		} catch (Exception e) {
@@ -102,6 +129,7 @@ public class BaseClass {
 	public void tearDown() {
 
 		driver.quit();
+		extent.flush();
 	}
 
 	@DataProvider(name = "data-provider")

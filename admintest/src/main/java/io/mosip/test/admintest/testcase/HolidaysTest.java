@@ -24,6 +24,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import io.mosip.test.admintest.utility.BaseClass;
 import io.mosip.test.admintest.utility.Commons;
 import io.mosip.test.admintest.utility.JsonUtil;
@@ -33,31 +35,38 @@ public class HolidaysTest extends BaseClass{
  
   @Test(groups = "H")
   public void holidaysCRUD() throws Exception {
+	  test=extent.createTest("HolidaysTest", "verify Login");
 	String listofholidays="admin/masterdata/holiday/view";
+	test=extent.createTest("HolidaysTest", "verify Login");
 	String holidayDate=JsonUtil.JsonObjParsing(Commons.getTestData(),"holidayDate");
-    Commons.click(driver,By.xpath("//a[@href='#/admin/masterdata']"));
+    Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));
    
-    Commons.click(driver,By.id(listofholidays));
-    Commons.click(driver,By.id("Create"));
+    Commons.click(test,driver,By.id(listofholidays));
+    Commons.click(test,driver,By.id("Create"));
+    test.log(Status.INFO, "Click on Create");
     
   
-    Commons.enter(driver,By.id("holidayName"),data);
-    Commons.enter(driver,By.id("holidayDesc"),data);
-    Commons.enter(driver,By.id("holidayDate"),holidayDate);
-    Commons.dropdown(driver,By.id("locationCode"));
+    Commons.enter(test,driver,By.id("holidayName"),data);
+    Commons.enter(test,driver,By.id("holidayDesc"),data);
+    Commons.enter(test,driver,By.id("holidayDate"),holidayDate);
+    test.log(Status.INFO, "Click on Enters HolidayDate");
+    Commons.dropdown(test,driver,By.id("locationCode"));
         
     
-    Commons.create(driver);
-	Commons.filter(driver, By.id("holidayName"), data);
+    Commons.create(test,driver);
+	Commons.filter(test,driver, By.id("holidayName"), data);
 	
 
-	Commons.edit(driver,data+1,By.id("holidayName"));
-	Commons.filter(driver, By.id("holidayName"), data+1);
+	Commons.edit(test,driver,data+1,By.id("holidayName"));
+	test.log(Status.INFO, "Click on edit");
+	Commons.filter(test,driver, By.id("holidayName"), data+1);
 	
-	Commons.activate(driver);
-	Commons.edit(driver,data+2,By.id("holidayName"));
-	Commons.filter(driver, By.id("holidayName"), data+2);
-	Commons.deactivate(driver);
+	Commons.activate(test,driver);
+	test.log(Status.INFO, "Click on Active");
+	Commons.edit(test,driver,data+2,By.id("holidayName"));
+	Commons.filter(test,driver, By.id("holidayName"), data+2);
+	Commons.deactivate(test,driver);
+	test.log(Status.INFO, "Click on Deactive");
 
     }
 }

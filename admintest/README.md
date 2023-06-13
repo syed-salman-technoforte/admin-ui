@@ -36,9 +36,16 @@ Selenium webdriver based Admin Portal Automation covers CRUD(create, read, updat
 * machineTypesCRUD: MT
 * templateCRUD: T
 
+## Headless Mode
+*Update below key from `TestData.json`
+* hedless: "no" --To run in normal mode.
+* hedless : "yes" --To run in headless mode
+
 ## Execution result and logs
 1. Verify the failure in the logs file `\logs\AutomationLogs.log`
-1. Execution results present under test-output folder file `emailable-report.html`
+2. Execution results present under test-output folder file `emailable-report.html`
+3. Extent results are present  `\admintest\Reports`
+
 
 ## License
 This project is licensed under the terms of [Mozilla Public License 2.0](../LICENSE).

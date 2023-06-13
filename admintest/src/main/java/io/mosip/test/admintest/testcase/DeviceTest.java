@@ -22,6 +22,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 
 import io.mosip.test.admintest.utility.BaseClass;
@@ -33,37 +34,41 @@ public class DeviceTest extends BaseClass{
 	   String validityDate;
 	try {
 		validityDate = JsonUtil.JsonObjParsing(Commons.getTestData(),"validityDate");
-	
-	   Commons.click(driver,By.id("admin/resources"));
-	   Commons.click(driver,By.id("/admin/resources/devices"));
-	   Commons.click(driver,By.id("Create Device"));
+		 test=extent.createTest("DeviceTest", "verify Login");
+	   Commons.click(test,driver,By.id("admin/resources"));
+	   Commons.click(test,driver,By.id("/admin/resources/devices"));
+	   Commons.click(test,driver,By.id("Create Device"));
+	   test.log(Status.INFO, "Click on Create Device");
 	   
-	   
-	   Commons.enter(driver, By.id("name"),data);
-	   Commons.enter(driver, By.id("serialNumber"),data);
+	   Commons.enter(test,driver, By.id("name"),data);
+	   Commons.enter(test,driver, By.id("serialNumber"),data);
 
-	   Commons.enter(driver, By.id("macAddress"),"1.1234");
+	   Commons.enter(test,driver, By.id("macAddress"),"1.1234");
+	   test.log(Status.INFO, "Enters MACAddress");
  
-	   Commons.enter(driver, By.id("ipAddress"),"2.2345");
-	   Commons.enter(driver, By.id("validity"),validityDate);
+	   Commons.enter(test,driver, By.id("ipAddress"),"2.2345");
+	   Commons.enter(test,driver, By.id("validity"),validityDate);
       
-    Commons.dropdown(driver,By.id("deviceSpecId"));
-     Commons.dropdown(driver,By.id("zone"));
-      Commons.dropdown(driver,By.id("regCenterId"));
+    Commons.dropdown(test,driver,By.id("deviceSpecId"));
+     Commons.dropdown(test,driver,By.id("zone"));
+      Commons.dropdown(test,driver,By.id("regCenterId"));
       
 
-      	Commons.createRes(driver);
-     	Commons.filter(driver, By.id("name"), data);
+      	Commons.createRes(test,driver);
+      	test.log(Status.INFO, "Click on Create");
+     	Commons.filter(test,driver, By.id("name"), data);
      	
 
-     	Commons.editRes(driver,data+1,By.id("name"));
-     	Commons.filter(driver, By.id("name"), data+1);
+     	Commons.editRes(test,driver,data+1,By.id("name"));
+     	Commons.filter(test,driver, By.id("name"), data+1);
      	
-     	Commons.activate(driver);
-     	Commons.editRes(driver,data+2,By.id("name"));
-     	Commons.filter(driver, By.id("name"), data+2);
-     	Commons.deactivate(driver);
-     	Commons.decommission(driver);
+     	Commons.activate(test,driver);
+     	test.log(Status.INFO, "Click on Activate");
+     	Commons.editRes(test,driver,data+2,By.id("name"));
+     	Commons.filter(test,driver, By.id("name"), data+2);
+     	Commons.deactivate(test,driver);
+     	Commons.decommission(test,driver);
+     	test.log(Status.INFO, "Click on Decommission");
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
