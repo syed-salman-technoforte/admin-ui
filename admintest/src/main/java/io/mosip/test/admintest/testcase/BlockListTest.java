@@ -24,6 +24,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.Status;
+
 import io.mosip.test.admintest.utility.BaseClass;
 import io.mosip.test.admintest.utility.Commons;
 import io.mosip.test.admintest.utility.JsonUtil;
@@ -36,28 +38,32 @@ public class BlockListTest extends BaseClass {
 		try {
 			String blocklistedWord=JsonUtil.JsonObjParsing(Commons.getTestData(),"dummyData");
 		
-		
+			test=extent.createTest("BlockListTest", "verify Login");
 		String idBlocklisted="admin/masterdata/blocklisted-words/view";
-		Commons.click(driver, By.xpath("//a[@href='#/admin/masterdata']"));
+		Commons.click(test,driver, By.xpath("//a[@href='#/admin/masterdata']"));
 		
-		Commons.click(driver, By.id(idBlocklisted));
+		Commons.click(test,driver, By.id(idBlocklisted));
 
-		Commons.click(driver, By.id("Create")); 
-		Commons.enter(driver, By.id("word"), blocklistedWord); 
-		Commons.enter(driver, By.id("description"), data);
+		Commons.click(test,driver, By.id("Create")); 
+		test.log(Status.INFO, "Click on Create");
+		Commons.enter(test,driver, By.id("word"), blocklistedWord); 
+		Commons.enter(test,driver, By.id("description"), data);
+   
+		
+		Commons.create(test,driver);
+		test.log(Status.INFO, "Click on Create");
+		Commons.filter(test,driver, By.id("word"), blocklistedWord);
+		
 
+		Commons.edit(test,driver,blocklistedWord+"auto",By.id("word"));
+		test.log(Status.INFO, "Click on Edit");
+		Commons.filter(test,driver, By.id("word"), blocklistedWord+"A");
 		
-		Commons.create(driver);
-		Commons.filter(driver, By.id("word"), blocklistedWord);
-		
-
-		Commons.edit(driver,blocklistedWord+"auto",By.id("word"));
-		Commons.filter(driver, By.id("word"), blocklistedWord+"A");
-		
-		Commons.activate(driver);
-		Commons.edit(driver,blocklistedWord+"B",By.id("word"));
-		Commons.filter(driver, By.id("word"), blocklistedWord+"B");
-		Commons.deactivate(driver);
+		Commons.activate(test,driver);
+		Commons.edit(test,driver,blocklistedWord+"B",By.id("word"));
+		Commons.filter(test,driver, By.id("word"), blocklistedWord+"B");
+		Commons.deactivate(test,driver);
+		test.log(Status.INFO, "Click on Deactivate");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
