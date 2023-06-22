@@ -54,7 +54,7 @@
             </div>
             <div class="custom-file-input">    
               <input type="button" *ngIf="buttonalignment === 'rtl'" value="{{labelanddatas.chooseFile | translate }}" class="browseInput">           
-              <input type="file" accept=".xlsx, .xls, .csv" #fileInput (click)="onFileClick($event)" (change)="onFileSelect($event)" placeholder="Upload file...*" >
+              <input type="file" accept=".xlsx, .xls, .csv" id="fileInput" #fileInput (click)="onFileClick($event)" (change)="onFileSelect($event)" placeholder="Upload file...*" >
               <input type="text" id="fileName"  formControlName="fileName" placeholder="{{labelanddatas.uploadFile | translate }}"  >
               <span style="color:#ff0000;font-size:12px;left: 114px;" *ngIf="primaryLang === 'eng'" >*</span>
               <span style="color:#ff0000;font-size:12px;left: 162px;" *ngIf="primaryLang === 'fra'" >*</span>
