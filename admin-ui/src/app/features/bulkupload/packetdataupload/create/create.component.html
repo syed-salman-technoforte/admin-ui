@@ -89,9 +89,7 @@
               <input type="button" *ngIf="buttonalignment === 'rtl'" value="{{'packet-upload.createView.input-btn-text' | translate}}" class="browseInput">
               <input type="file" multiple="multiple" id="fileInput" #fileInput (click)="$event.target.value=null" (change)="onFileSelect($event)" required placeholder="{{'packet-upload.createView.input-text1' | translate}}" />
               <input type="text" id="fileName" [value]="fileName" placeholder="{{'packet-upload.createView.input-text2' | translate}}" >
-              <span style="color:#ff0000;font-size:12px;left: 114px;" *ngIf="primaryLang === 'eng'" >*</span>
-              <span style="color:#ff0000;font-size:12px;left: 162px;" *ngIf="primaryLang === 'fra'" >*</span>
-              <span style="color:#ff0000;font-size:12px;left: 122px;" *ngIf="primaryLang === 'ara'" >*</span>
+              <span style="color:#ff0000;font-size:12px;left: 114px;" class="required-annotation">*</span>
               <input type="button" *ngIf="buttonalignment === 'ltr'" value="{{'packet-upload.createView.input-btn-text' | translate}}" class="browseInput">
               <mat-error *ngIf="fileNameError">
                 {{'genericerror.fieldValidation' | translate}}
