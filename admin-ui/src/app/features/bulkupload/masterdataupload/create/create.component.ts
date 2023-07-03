@@ -131,7 +131,7 @@ export class CreateComponent {
       const file = event.target.files[0];
       this.uploadForm.get('files').setValue(file);
       this.uploadForm.get('fileName').setValue(file.name);
-      document.getElementById("fileName").classList.remove('addredborder');
+      //document.getElementById("fileName").classList.remove('addredborder');
       this.fileNameError = false;
     }
   }
