@@ -109,7 +109,7 @@ export class CreateComponent {
       this.fileName = files.map(f => f.name).join(', ');
       this.uploadForm.get('fileName').setValue(this.fileName);
       this.fileCount = event.target.files.length;
-      document.getElementById("fileName").classList.remove('addredborder');
+      //document.getElementById("fileName").classList.remove('addredborder');
       this.fileNameError = false;
     }
   }
