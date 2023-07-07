@@ -68,7 +68,7 @@ public class BulkUploadTest extends BaseClass {
 	@Test (dataProvider = "data-provider",groups = "BU")
   public void bulkUploadCRUD(String table) throws Exception {
 	
-    	
+		test=extent.createTest("bulkUploadCRUD", "verify Login");	
     Commons.click(test,driver,By.id("admin/bulkupload"));
     Commons.click(test,driver,By.xpath("//a[@href='#/admin/bulkupload/masterdataupload']"));
     
@@ -83,29 +83,13 @@ public class BulkUploadTest extends BaseClass {
     
     Commons.dropdown(test,driver,By.id("tableName"),By.id(table));
     // Commons.click(test,driver,By.xpath("//div[@class='custom-file-input']"));
-    Commons.click(test,driver,By.xpath("//div[@class='custom-file-input']"));
+   // Commons.click(test,driver,By.id("fileInput"));
     
 
-    String filePath = System.getProperty("user.dir") + "\\BulkUploadFiles\\"+ JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang")+"\\"+table+".png";
-   StringSelection ss = new StringSelection(filePath);
-   Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+    String filePath = System.getProperty("user.dir") + "\\BulkUploadFiles\\"+ JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang")+"\\"+table+".csv";
+   Commons.enter(test, driver, By.id("fileInput"), filePath);
    
-   Robot robot = new Robot();
-  
-   robot.delay(250);
-
-   
-   robot.keyPress(KeyEvent.VK_ENTER);
-   robot.keyRelease(KeyEvent.VK_ENTER);
-   robot.keyPress(KeyEvent.VK_CONTROL);
-   robot.keyPress(KeyEvent.VK_V);
-   robot.keyRelease(KeyEvent.VK_V);
-   robot.delay(250);
-   robot.keyRelease(KeyEvent.VK_CONTROL);
-   robot.keyPress(KeyEvent.VK_ENTER);
-   robot.delay(250);
-   robot.keyRelease(KeyEvent.VK_ENTER);
-   robot.delay(250);
+ 
     
     Commons.click(test,driver,By.xpath("//button[@id='createButton']"));
     Commons.click(test,driver,By.id("confirmpopup")); 
