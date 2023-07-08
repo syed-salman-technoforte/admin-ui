@@ -19,7 +19,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 public class Commons  extends BaseClass{
 	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(Commons.class);
 
-	public static String appendDate="0"+getDateTime();
+	public static String appendDate=getPreAppend()+getDateTime();
 	
 	public static String getDateTime()
 	  {
@@ -34,8 +34,9 @@ public class Commons  extends BaseClass{
 		try {
 		logger.info("Inside Filter " + by + data);
 		Commons.click(test,driver, By.id("Filter")); 
-	
+		Thread.sleep(3000);
 		Commons.enter(test,driver, by, data); 
+		Thread.sleep(3000);
 		Commons.click(test,driver, By.id("applyTxt"));
 		}
 		catch (Exception e) {
@@ -326,9 +327,10 @@ public class Commons  extends BaseClass{
 		try {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Edit0")); 
-		
+		Thread.sleep(3000);
 		Assert.assertNotEquals(data,
 				driver.findElement(by).getText());
+		Thread.sleep(3000);
 		driver.findElement(by).clear();
 
 		Commons.enter(test,driver, by, data);
@@ -412,6 +414,17 @@ public class Commons  extends BaseClass{
 			Commons.click(test,driver, By.id("confirmmessagepopup")); 
 			logger.info("Click decommission and confirm");
 	}
+	public static String getPreAppend() 
+	  {
+	String preappend = null;
+	try {
+		preappend = JsonUtil.JsonObjParsing(getTestData(),"preappend");
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return preappend;
+	  }
 	
 	
 	

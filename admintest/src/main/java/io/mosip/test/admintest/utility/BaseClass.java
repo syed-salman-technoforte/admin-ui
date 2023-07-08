@@ -39,6 +39,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.mosip.kernel.util.KeycloakUserManager;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -51,8 +52,8 @@ public class BaseClass {
 	protected JavascriptExecutor js;
 	protected String langcode;
 	protected String envPath = System.getProperty("path");
-	protected String userid = System.getProperty("userid");
-	protected String password = System.getProperty("password");
+	protected String userid = "adminui-auto";
+	protected String password = "mosip123";
 	protected String data = Commons.appendDate;
 	public static ExtentSparkReporter html;
     public static    ExtentReports extent;
