@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -33,6 +34,7 @@ import io.mosip.test.admintest.utility.Commons;
 import io.mosip.test.admintest.utility.JsonUtil;
 import io.mosip.test.admintest.utility.PropertiesUtil;
 import io.mosip.test.admintest.utility.SetTestName;
+import io.mosip.test.admintest.utility.TestRunner;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -41,7 +43,10 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
 public class BulkUploadTest extends BaseClass {
+	private static final Logger logger = Logger.getLogger(BulkUploadTest.class);
+
 /*implements ITest{
+ * 
  
  private String newTestName = "";
 
@@ -97,7 +102,7 @@ public class BulkUploadTest extends BaseClass {
     
     String divText=driver.findElement(By.xpath("//div[@class='mat-dialog-content']//div")).getText();
     String divTextArr[]=divText.split(":");
-    System.out.println(divTextArr[1].trim());
+    logger.info(divTextArr[1].trim());
     
     Commons.click(test,driver,By.id("confirmmessagepopup")); //DONE
     Thread.sleep(Long.parseLong(JsonUtil.JsonObjParsing(Commons.getTestData(),"bulkwait")));

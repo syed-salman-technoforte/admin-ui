@@ -92,7 +92,7 @@ public class Commons  extends BaseClass{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 		} catch (Exception e) {
 		
 			try {
@@ -127,7 +127,7 @@ public class Commons  extends BaseClass{
 			}
 			catch (TimeoutException toe) {
 				driver.findElement(by).sendKeys(value);
-				System.out.println( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+				logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 			} 
 			catch (Exception e) {
 				try {

@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,8 +26,11 @@ import org.testng.annotations.Test;
 
 import io.mosip.test.admintest.utility.BaseClass;
 import io.mosip.test.admintest.utility.Commons;
+import io.mosip.test.admintest.utility.TestRunner;
 
 public class LoginTest extends BaseClass{
+	private static final Logger logger = Logger.getLogger(LoginTest.class);
+
  
   @Test(priority = 0)
   public void loginTest() throws Exception {
@@ -42,7 +46,7 @@ public class LoginTest extends BaseClass{
     try {
 		 language=Commons.getFieldData("langcode");
 	
-    System.out.println(language);
+    logger.info(language);
     } catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
