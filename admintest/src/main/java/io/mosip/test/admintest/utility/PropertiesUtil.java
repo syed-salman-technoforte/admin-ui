@@ -5,9 +5,12 @@ package io.mosip.test.admintest.utility;
 import java.io.*;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 
 public class PropertiesUtil {
-   // private static final Logger logger = LogManager.getLogger(PropertiesUtil.class);
+	private static final Logger logger = Logger.getLogger(PropertiesUtil.class);
+
 
     public static String getKeyValue(String key) throws IOException {
 
@@ -27,7 +30,7 @@ public class PropertiesUtil {
 
     public static void main(String[] args) throws IOException {
         String value = getKeyValue("PropertyFilePath");
-        System.out.println(value);
+        logger.info(value);
     }
 
 }

@@ -3,15 +3,16 @@ package io.mosip.test.admintest.utility;
 import java.io.File;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 
-import io.mosip.admin.fw.util.AdminTestUtil;
-import io.mosip.service.BaseTestCase;
+import io.mosip.test.admintest.fw.util.AdminTestUtil;
 import io.mosip.test.admintest.testcase.*;
 
 
 public class TestRunner {
+	private static final Logger logger = Logger.getLogger(TestRunner.class);
 	static TestListenerAdapter tla = new TestListenerAdapter();
 	
 	public static String jarUrl = TestRunner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
@@ -58,7 +59,7 @@ public class TestRunner {
 	}
 	public static String getGlobalResourcePath() {
 		if (checkRunType().equalsIgnoreCase("JAR")) {
-			return new File(jarUrl).getParentFile().getAbsolutePath()+"/MosipTestResource".toString();
+			return new File(jarUrl).getParentFile().getAbsolutePath().toString();
 		} else if (checkRunType().equalsIgnoreCase("IDE")) {
 			String path = new File(TestRunner.class.getClassLoader().getResource("").getPath()).getAbsolutePath()
 					.toString();
