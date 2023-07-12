@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.mosip.test</groupId>
-  <artifactId>admintest</artifactId>
+  <groupId>io.mosip.testrig.adminui</groupId>
+  <artifactId>adminui</artifactId>
   <version>1.2.1</version>
   <name>admin-ui-automation</name>
   <description>admin-ui-automation</description>
@@ -45,7 +45,7 @@
                <archive>
                   <manifest>
                      <addClasspath>true</addClasspath>
-                     <mainClass>io.mosip.test.admintest.utility.TestRunner</mainClass>
+                     <mainClass>io.mosip.testrig.adminui.utility.TestRunner</mainClass>
                   </manifest>
                </archive>
             </configuration>
