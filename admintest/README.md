@@ -6,7 +6,7 @@ Selenium webdriver based Admin Portal Automation covers CRUD(create, read, updat
 ## Build
 1. Build jar `mvn clean install`
 2. Place jar in one folder along with src/main/resources files and folder
-3. Run jar with vm args- ``` java  -Dpath=https://env.mosip.net/ -Duserid=user -Dpassword=pwd -jar nameofAdminJar.jar```
+3. Run jar with vm args- ``` -Dpath=https://admin.dev.mosip.net/ -DKeyclockURL=https://iam.dev.mosip.net -Denv.user=api-internal.dev  -Denv.endpoint=https://api-internal.dev.mosip.net jar nameofAdminJar.jar```
 
 ## Configurations
 1. Update below keys from `Config.properties`
@@ -45,6 +45,11 @@ Selenium webdriver based Admin Portal Automation covers CRUD(create, read, updat
 1. Verify the failure in the logs file `\logs\AutomationLogs.log`
 2. Execution results present under test-output folder file `emailable-report.html`
 3. Extent results are present  `\admintest\Reports`
+
+#Usercreation
+1.In config folder `\config\kernal.property`
+2.on line no 27,36,38 chnage we can change the user(keep same at all three place)
+3.
 
 
 ## License
