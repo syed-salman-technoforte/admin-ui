@@ -132,33 +132,33 @@ public class BaseClass {
 
 		driver.quit();
 		extent.flush();
-		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
-			// EXTENT REPORT
-			File repotFile2 = new File(System.getProperty("user.dir") + "/" + "Reports"
-					+ "/" + System.getProperty("emailable.reports.name"));
-			System.out.println("reportFile is::" + System.getProperty("user.dir") + "/"
-					+ System.getProperty("test-output.dir") + "/" + System.getProperty("emailable-report.html.name"));
-			
-			S3Adapter s3Adapter = new S3Adapter();
-			boolean isStoreSuccess = false;
-			try {
-				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
-						null, System.getProperty("emailable.report3.name"), repotFile2);
-				
-				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
-						null, System.getProperty("emailable.report3.name"), repotFile2);
-				
-				System.out.println("isStoreSuccess:: " + isStoreSuccess);
-			} catch (Exception e) {
-				System.out.println("error occured while pushing the object" + e.getLocalizedMessage());
-				e.printStackTrace();
-			}
-			if (isStoreSuccess) {
-				System.out.println("Pushed file to S3");
-			} else {
-				System.out.println("Failed while pushing file to S3");
-			}
-		}
+//		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
+//			// EXTENT REPORT
+//			File repotFile2 = new File(System.getProperty("user.dir") + "/" + "Reports"
+//					+ "/" + System.getProperty("emailable.reports.name"));
+//			System.out.println("reportFile is::" + System.getProperty("user.dir") + "/"
+//					+ System.getProperty("test-output.dir") + "/" + System.getProperty("emailable-report.html.name"));
+//			
+//			S3Adapter s3Adapter = new S3Adapter();
+//			boolean isStoreSuccess = false;
+//			try {
+//				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
+//						null, System.getProperty("emailable.report3.name"), repotFile2);
+//				
+//				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
+//						null, System.getProperty("emailable.report3.name"), repotFile2);
+//				
+//				System.out.println("isStoreSuccess:: " + isStoreSuccess);
+//			} catch (Exception e) {
+//				System.out.println("error occured while pushing the object" + e.getLocalizedMessage());
+//				e.printStackTrace();
+//			}
+//			if (isStoreSuccess) {
+//				System.out.println("Pushed file to S3");
+//			} else {
+//				System.out.println("Failed while pushing file to S3");
+//			}
+//		}
 	}
 
 	@DataProvider(name = "data-provider")
