@@ -5,17 +5,18 @@ import com.aventstack.extentreports.ExtentTest;
 
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
-public class ExtentReportManager {
+public class ExtentReportManager extends BaseClass {
 	public static ExtentSparkReporter html;
 	public static	ExtentReports extent;
+	public static String Filepath;
 	//public static WebDriver driver;
 	public static	ExtentTest test;
 	public static ExtentReports getReports() {
 		if(extent==null) {
 			extent=new ExtentReports();
 			extent=new ExtentReports();
-			String path=System.getProperty("user.dir")+"/Reports/"+"AdminReports"+Commons.getDateTime()+".html";
-			html=new ExtentSparkReporter(path);
+			Filepath=System.getProperty("user.dir")+"/Reports/"+"AdminReports"+Commons.appendDate+".html";
+			html=new ExtentSparkReporter(Filepath);
 			  extent.attachReporter(html);
 		}
 		
