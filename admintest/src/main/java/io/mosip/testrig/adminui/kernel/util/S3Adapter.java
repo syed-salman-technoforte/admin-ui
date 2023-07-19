@@ -3,6 +3,7 @@ package io.mosip.testrig.adminui.kernel.util;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.google.common.collect.ImmutableMap;
 
 //import io.mosip.kernel.core.util.StringUtils;
 
@@ -93,7 +95,8 @@ public class S3Adapter {
 	 * connection.putObject(bucketName, finalObjectName, file); return true; }
 	 */
 	
-	public boolean putObject(String account, final String container, String source, String process, String objectName, File file) {
+	public boolean 
+	putObject(String account, final String container, String source, String process, String objectName, File repotFile) {
 		String finalObjectName = null;
 		String bucketName = null;
 		boolean bReturn = false;
@@ -113,7 +116,7 @@ public class S3Adapter {
 				if (useAccountAsBucketname)
 					existingBuckets.add(bucketName);
 			}
-			PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, finalObjectName, file);
+			PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, finalObjectName, repotFile);
 			ObjectMetadata objectMetadata = new ObjectMetadata();
 			objectMetadata.setHttpExpiresDate(new DateTime().plusDays(reportExpirationInDays).toDate());
 			putObjectRequest.setMetadata(objectMetadata);
@@ -184,4 +187,35 @@ public class S3Adapter {
 
 		return finalObjectName;
 	}
+
+	public boolean putObjectWithMetadata(String account, final String container, String source, String process, String objectName, File sourcefile, ObjectMetadata metadata) {
+		String finalObjectName = null;
+		String bucketName = null;
+		boolean bReturn = false;
+
+		if (useAccountAsBucketname) {
+			finalObjectName = getName(container, source, process, objectName);
+			bucketName = account;
+		} else {
+			finalObjectName = getName(source, process, objectName);
+			bucketName = container;
+		}
+
+		AmazonS3 connection = getConnection(bucketName);
+		if (connection != null) {
+			if (!doesBucketExists(bucketName)) {
+				connection.createBucket(bucketName);
+				if (useAccountAsBucketname)
+					existingBuckets.add(bucketName);
+			}
+
+			PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, finalObjectName, sourcefile);
+			putObjectRequest.setMetadata(metadata);
+			connection.putObject(putObjectRequest);
+			bReturn = true;
+		}
+
+		return bReturn;
+	}
+
 }

@@ -25,6 +25,7 @@ import org.testng.Assert;
 import org.testng.ITest;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -52,17 +53,24 @@ public class BaseClass {
 	protected JavascriptExecutor js;
 	protected String langcode;
 	protected String envPath = System.getProperty("path");
+	protected String env=System.getProperty("env.user");
 	protected String userid = KeycloakUserManager.moduleSpecificUser;
 	protected String[] allpassword = ConfigManager.getIAMUsersPassword().split(",");
 	protected String password = allpassword[0];
-	protected String data = Commons.appendDate;
+	protected  String data = Commons.appendDate;
 	public static ExtentSparkReporter html;
+	
+	
     public static    ExtentReports extent;
     public static    ExtentTest test;
 
 	public void setLangcode(String langcode) throws Exception {
 		this.langcode = Commons.getFieldData("langcode");
 	}
+	
+	@BeforeSuite
+	
+	
 
   @BeforeMethod
     public void set() {
@@ -76,30 +84,14 @@ public class BaseClass {
 		ChromeOptions options = new ChromeOptions();
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		
-	//logger.info(WebDriverManager.getInstance().getBrowserPath());
-//		options.addArguments("no-sandbox");
-//		options.addArguments("disable-gpu");
+	
 		if(headless.equalsIgnoreCase("yes")) {
 			options.addArguments("--headless=new");
 		}
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver(options);
 		
-//		logger.info(System.getProperty("user.dir"));
-//		String configFilePath = System.getProperty("user.dir") + "\\chromedriver\\chromedriver.exe";
-//		System.setProperty("webdriver.chrome.driver", configFilePath);	
-//		ChromeOptions options = new ChromeOptions();
-//		try {
-//			String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-//			if(headless.equalsIgnoreCase("yes")) {
-//				options.addArguments("--headless=new");
-//			}
-//		} catch (Exception e1) {
-//			
-//			e1.printStackTrace();
-//		}
-//		 
-//		driver = new ChromeDriver(options);
+//		
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get(envPath);
@@ -132,34 +124,38 @@ public class BaseClass {
 
 		driver.quit();
 		extent.flush();
-//		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
-//			// EXTENT REPORT
-//			File repotFile2 = new File(System.getProperty("user.dir") + "/" + "Reports"
-//					+ "/" + System.getProperty("emailable.reports.name"));
-//			System.out.println("reportFile is::" + System.getProperty("user.dir") + "/"
-//					+ System.getProperty("test-output.dir") + "/" + System.getProperty("emailable-report.html.name"));
-//			
-//			S3Adapter s3Adapter = new S3Adapter();
-//			boolean isStoreSuccess = false;
-//			try {
-//				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
-//						null, System.getProperty("emailable.report3.name"), repotFile2);
-//				
-//				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
-//						null, System.getProperty("emailable.report3.name"), repotFile2);
-//				
-//				System.out.println("isStoreSuccess:: " + isStoreSuccess);
-//			} catch (Exception e) {
-//				System.out.println("error occured while pushing the object" + e.getLocalizedMessage());
-//				e.printStackTrace();
-//			}
-//			if (isStoreSuccess) {
-//				System.out.println("Pushed file to S3");
-//			} else {
-//				System.out.println("Failed while pushing file to S3");
-//			}
-//		}
 	}
+	
+	@AfterSuite
+	public void pushFileToS3() {
+		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
+			// EXTENT REPORT
+			File repotFile = new File(ExtentReportManager.Filepath);
+			System.out.println("reportFile is::" + repotFile);
+			 String reportname = repotFile.getName();
+			
+			
+			S3Adapter s3Adapter = new S3Adapter();
+			boolean isStoreSuccess = false;
+			try {
+				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
+						"AdminUi",env+BaseTestCaseFunc.currentModule+data+".html", repotFile);
+				
+				System.out.println("isStoreSuccess:: " + isStoreSuccess);
+			} catch (Exception e) {
+				System.out.println("error occured while pushing the object" + e.getLocalizedMessage());
+				e.printStackTrace();
+			}
+			if (isStoreSuccess) {
+				System.out.println("Pushed file to S3");
+			} else {
+				System.out.println("Failed while pushing file to S3");
+			}
+		}
+		
+		}
+	
+	
 
 	@DataProvider(name = "data-provider")
 	public Object[] dpMethod() {
