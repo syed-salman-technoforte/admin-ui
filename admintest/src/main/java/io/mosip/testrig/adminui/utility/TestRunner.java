@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
 
+import io.mosip.testrig.adminui.dbaccess.DBManager;
 import io.mosip.testrig.adminui.fw.util.AdminTestUtil;
 import io.mosip.testrig.adminui.testcase.*;
 
@@ -32,7 +33,10 @@ public class TestRunner {
 //    		temporaryVid= AdminTestUtil.generateVID(uin, "temporary");
 //    	}
 		AdminTestUtil.initialize();
-		
+		DBManager.clearMasterDbData();
+//		BaseTestCase.currentModule = GlobalConstants.MASTERDATA;
+//		BaseTestCase.setReportName("masterdata-" + localLanguageList.get(i));
+		//startTestRunner();
 		
 		testNg=new TestNG();
 		

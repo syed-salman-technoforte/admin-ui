@@ -58,13 +58,13 @@ public class ConfigManager {
 //	private static String LANG_SELECT = "langselect";
 //	
 //
-//	private static String DB_PORT = "db-port";
-//	private static String DB_DOMAIN = "db-server";
-//	private static String HIBERNATE_CONNECTION_DRIVER_CLASS = "hibernate.connection.driver_class";
-//	private static String HIBERNATE_CONNECTION_POOL_SIZE = "hibernate.connection.pool_size";
-//	private static String HIBERNATE_DIALECT = "hibernate.dialect";
-//	private static String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-//	private static String HIBERNATE_CONTEXT_CLASS = "hibernate.current_session_context_class";
+	private static String DB_PORT = "db-port";
+	private static String DB_DOMAIN = "db-server";
+	private static String HIBERNATE_CONNECTION_DRIVER_CLASS = "hibernate.connection.driver_class";
+	private static String HIBERNATE_CONNECTION_POOL_SIZE = "hibernate.connection.pool_size";
+	private static String HIBERNATE_DIALECT = "hibernate.dialect";
+	private static String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+	private static String HIBERNATE_CONTEXT_CLASS = "hibernate.current_session_context_class";
 //
 //	private static String AUDIT_DB_USER = "db-su-user";
 //	private static String AUDIT_DB_PASS = "postgresql-password";
@@ -82,9 +82,9 @@ public class ConfigManager {
 //	private static String KM_DB_PASS = "postgresql-password";
 //	private static String KM_DB_SCHEMA = "km_db_schema";
 //
-//	private static String MASTER_DB_USER = "db-su-user";
-//	private static String MASTER_DB_PASS = "postgresql-password";
-//	private static String MASTER_DB_SCHEMA = "master_db_schema";
+	private static String MASTER_DB_USER = "db-su-user";
+	private static String MASTER_DB_PASS = "postgresql-password";
+	private static String MASTER_DB_SCHEMA = "master_db_schema";
 //
 	private static String IAM_EXTERNAL_URL = "keycloak-external-url";
 	private static String IAM_REALM_ID = "keycloak-realm-id";
@@ -144,13 +144,13 @@ public class ConfigManager {
 //	private static String threadCount;
 //	private static String langselect;
 //
-//	private static String db_port;
-//	private static String db_domain;
-//	private static String hibernate_connection_driver_class;
-//	private static String hibernate_connection_pool_size;
-//	private static String hibernate_dialect;
-//	private static String hibernate_show_sql;
-//	private static String hibernate_current_session_context_class;
+	private static String db_port;
+	private static String db_domain;
+	private static String hibernate_connection_driver_class;
+	private static String hibernate_connection_pool_size;
+	private static String hibernate_dialect;
+	private static String hibernate_show_sql;
+	private static String hibernate_current_session_context_class;
 //
 //	private static String audit_db_user;
 //	private static String audit_db_pass;
@@ -168,9 +168,9 @@ public class ConfigManager {
 //	private static String km_db_pass;
 //	private static String km_db_schema;
 //
-//	private static String master_db_user;
-//	private static String master_db_pass;
-//	private static String master_db_schema;
+	private static String master_db_user;
+	private static String master_db_pass;
+	private static String master_db_schema;
 //
 	private static String iam_external_url;
 	private static String iam_realm_id;
@@ -236,13 +236,13 @@ public class ConfigManager {
 		s3_secret_key = getValueForKey(S3_SECRET_KEY);
 		s3_account = getValueForKey(S3_ACCOUNT);
 		push_reports_to_s3 = getValueForKey(PUSH_TO_S3);
-//		db_port = getValueForKey(DB_PORT);
-//		db_domain = getValueForKey(DB_DOMAIN);
-//		hibernate_connection_driver_class = getValueForKey(HIBERNATE_CONNECTION_DRIVER_CLASS);
-//		hibernate_connection_pool_size = getValueForKey(HIBERNATE_CONNECTION_POOL_SIZE);
-//		hibernate_dialect = getValueForKey(HIBERNATE_DIALECT);
-//		hibernate_show_sql = getValueForKey(HIBERNATE_SHOW_SQL);
-//		hibernate_current_session_context_class = getValueForKey(HIBERNATE_CONTEXT_CLASS);
+		db_port = getValueForKey(DB_PORT);
+		db_domain = getValueForKey(DB_DOMAIN);
+		hibernate_connection_driver_class = getValueForKey(HIBERNATE_CONNECTION_DRIVER_CLASS);
+		hibernate_connection_pool_size = getValueForKey(HIBERNATE_CONNECTION_POOL_SIZE);
+		hibernate_dialect = getValueForKey(HIBERNATE_DIALECT);
+		hibernate_show_sql = getValueForKey(HIBERNATE_SHOW_SQL);
+		hibernate_current_session_context_class = getValueForKey(HIBERNATE_CONTEXT_CLASS);
 //		audit_db_user = getValueForKey(AUDIT_DB_USER);
 //		audit_db_pass = getValueForKey(AUDIT_DB_PASS);
 //		audit_db_schema = getValueForKey(AUDIT_DB_SCHEMA);
@@ -255,9 +255,9 @@ public class ConfigManager {
 //		km_db_user = getValueForKey(KM_DB_USER);
 //		km_db_pass = getValueForKey(KM_DB_PASS);
 //		km_db_schema = getValueForKey(KM_DB_SCHEMA);
-//		master_db_user = getValueForKey(MASTER_DB_USER);
-//		master_db_pass = getValueForKey(MASTER_DB_PASS);
-//		master_db_schema = getValueForKey(MASTER_DB_SCHEMA);
+		master_db_user = getValueForKey(MASTER_DB_USER);
+		master_db_pass = getValueForKey(MASTER_DB_PASS);
+		master_db_schema = getValueForKey(MASTER_DB_SCHEMA);
 		iam_external_url = getValueForKey(IAM_EXTERNAL_URL);
 		logger.info("keycloakendpoint from config manager::" + iam_external_url);
 //
@@ -489,33 +489,33 @@ public class ConfigManager {
 		return push_reports_to_s3;
 	}
 //
-//	public static String getIdaDbUrl() {
-//		return "jdbc:postgresql://" + db_domain + ":" + db_port + "/mosip_ida";
-//	}
+	public static String getIdaDbUrl() {
+		return "jdbc:postgresql://" + db_domain + ":" + db_port + "/mosip_ida";
+	}
 //
 //	public static String getAuditDbUrl() {
 //		return "jdbc:postgresql://" + db_domain + ":" + db_port + "/mosip_audit";
 //	}
 //
-//	public static String getDbDriverClass() {
-//		return hibernate_connection_driver_class;
-//	}
+	public static String getDbDriverClass() {
+		return hibernate_connection_driver_class;
+	}
 //
-//	public static String getDbConnectionPoolSize() {
-//		return hibernate_connection_pool_size;
-//	}
+	public static String getDbConnectionPoolSize() {
+		return hibernate_connection_pool_size;
+	}
 //
-//	public static String getDbDialect() {
-//		return hibernate_dialect;
-//	}
+	public static String getDbDialect() {
+		return hibernate_dialect;
+	}
 //
-//	public static String getShowSql() {
-//		return hibernate_show_sql;
-//	}
+	public static String getShowSql() {
+		return hibernate_show_sql;
+	}
 //
-//	public static String getDbSessionContext() {
-//		return hibernate_current_session_context_class;
-//	}
+	public static String getDbSessionContext() {
+		return hibernate_current_session_context_class;
+	}
 //
 //	public static String getAuditDbUser() {
 //		return audit_db_user;
@@ -550,9 +550,9 @@ public class ConfigManager {
 //		return "jdbc:postgresql://" + db_domain + ":" + db_port + "/mosip_keymgr";
 //	}
 //
-//	public static String getMASTERDbUrl() {
-//		return "jdbc:postgresql://" + db_domain + ":" + db_port + "/mosip_master";
-//	}
+	public static String getMASTERDbUrl() {
+		return "jdbc:postgresql://" + db_domain + ":" + db_port + "/mosip_master";
+	}
 //
 //	public static String getPMSDbUser() {
 //		return pms_db_user;
@@ -578,17 +578,17 @@ public class ConfigManager {
 //		return km_db_schema;
 //	}
 //
-//	public static String getMasterDbUser() {
-//		return master_db_user;
-//	}
+	public static String getMasterDbUser() {
+		return master_db_user;
+	}
 //
-//	public static String getMasterDbPass() {
-//		return master_db_pass;
-//	}
+	public static String getMasterDbPass() {
+		return master_db_pass;
+	}
 //
-//	public static String getMasterDbSchema() {
-//		return master_db_schema;
-//	}
+	public static String getMasterDbSchema() {
+		return master_db_schema;
+	}
 //
 //	// from docker env getting only host url
 	public static String getIAMUrl() {
