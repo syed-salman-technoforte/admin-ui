@@ -2,10 +2,12 @@ package io.mosip.testrig.adminui.utility;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -54,7 +56,7 @@ public class BaseClass {
 	protected String langcode;
 	protected String envPath = System.getProperty("path");
 	protected String env=System.getProperty("env.user");
-	protected String userid = KeycloakUserManager.moduleSpecificUser;
+	public static String userid = KeycloakUserManager.moduleSpecificUser;
 	protected String[] allpassword = ConfigManager.getIAMUsersPassword().split(",");
 	protected String password = allpassword[0];
 	protected  String data = Commons.appendDate;
@@ -121,7 +123,7 @@ public class BaseClass {
 
 	@AfterMethod
 	public void tearDown() {
-
+		getCommitId();
 		driver.quit();
 		extent.flush();
 	}
@@ -130,6 +132,7 @@ public class BaseClass {
 	public void pushFileToS3() {
 		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
 			// EXTENT REPORT
+			
 			File repotFile = new File(ExtentReportManager.Filepath);
 			System.out.println("reportFile is::" + repotFile);
 			 String reportname = repotFile.getName();
@@ -190,4 +193,17 @@ public class BaseClass {
 		}
 		return contents;
 	}
+	 private String getCommitId(){
+	    	Properties properties = new Properties();
+			try (InputStream is = ExtentReportManager.class.getClassLoader().getResourceAsStream("git.properties")) {
+				properties.load(is);
+				
+				return "Commit Id is: " + properties.getProperty("git.commit.id.abbrev") + " & Branch Name is:" + properties.getProperty("git.branch");
+
+			} catch (IOException e) {
+				logger.error(e.getStackTrace());
+				return "";
+			}
+			
+	    }
 }

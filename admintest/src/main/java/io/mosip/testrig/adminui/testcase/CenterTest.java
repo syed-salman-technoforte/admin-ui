@@ -69,7 +69,7 @@ public class CenterTest extends BaseClass{
     Commons.dropdown(test,driver, By.xpath("(//*[@id='fieldName'])[5]"));
    
   
-    Commons.dropdown(test,driver, By.id("zone"));
+ //   Commons.dropdown(test,driver, By.id("zone"));
     Commons.dropdown(test,driver, By.id("holidayZone"));
     test.log(Status.INFO, "Click on Holidayzon");
 
