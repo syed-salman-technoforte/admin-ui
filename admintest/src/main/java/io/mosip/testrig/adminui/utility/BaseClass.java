@@ -25,6 +25,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITest;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -63,8 +64,10 @@ public class BaseClass {
 	public static ExtentSparkReporter html;
 	
 	
+	
     public static    ExtentReports extent;
     public static    ExtentTest test;
+    
 
 	public void setLangcode(String langcode) throws Exception {
 		this.langcode = Commons.getFieldData("langcode");
@@ -81,8 +84,9 @@ public class BaseClass {
   
 	@BeforeMethod
 	public void setUp() throws Exception {
-		
-		
+		 Reporter.log("BaseClass",true);
+		   test=extent.createTest(getCommitId(),getCommitId());
+		  
 		ChromeOptions options = new ChromeOptions();
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		
@@ -123,13 +127,15 @@ public class BaseClass {
 
 	@AfterMethod
 	public void tearDown() {
-		getCommitId();
+		
 		driver.quit();
 		extent.flush();
+		
 	}
 	
 	@AfterSuite
 	public void pushFileToS3() {
+		getCommitId();
 		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
 			// EXTENT REPORT
 			
