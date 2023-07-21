@@ -98,6 +98,7 @@ public class ConfigManager {
 //	private static String MOUNT_PATH_FOR_SCENARIO = "mountPathForScenario";
 //	
 //	private static String PACKET_UTILITY_BASE_URL = "packetUtilityBaseUrl";
+	private static String ADMIN_USERNAME = "admin_userName";
 	private static String REPORT_EXPIRATION_IN_DAYS = "reportExpirationInDays";
 //	private static String pms_client_secret;
 //	private static String pms_client_id;
@@ -185,6 +186,7 @@ public class ConfigManager {
 //	private static String packetUtilityBaseUrl;
 	public static Properties propsKernel;
 	private static String reportExpirationInDays;
+	private static String admin_userName;
 
 	public static void setProperty(String key, String value) {
 		// Overwrite the value with only if the key exists
@@ -204,32 +206,14 @@ public class ConfigManager {
 		// Loading Kernel property
 		propsKernel = getproperty(TestRunner.getResourcePath() + "/" + "config/Kernel.properties");
 
-//		pms_client_secret = getValueForKey(MOSIP_PMS_CLIENT_SECRET);
-//		pms_client_id = getValueForKey(MOSIP_PMS_CLIENT_ID);
-//		pms_app_id = getValueForKey(MOSIP_PMS_APP_ID);
-//		resident_client_secret = getValueForKey(MOSIP_RESIDENT_CLIENT_SECRET);
-//		resident_client_id = getValueForKey(MOSIP_RESIDENT_CLIENT_ID);
-//		resident_app_id = getValueForKey(MOSIP_RESIDENT_APP_ID);
-//		mpartner_mobile_client_id = getValueForKey(MOSIP_MOBILE_CLIENT_ID);
-//		mpartner_mobile_client_secret = getValueForKey(MOSIP_MOBILE_CLIENT_SECRET);
 		idrepo_client_secret = getValueForKey(MOSIP_IDREPO_CLIENT_SECRET);
 		idrepo_client_id = getValueForKey(MOSIP_IDREPO_CLIENT_ID);
 		idrepo_app_id = getValueForKey(MOSIP_IDREPO_APP_ID);
 		admin_client_secret = getValueForKey(MOSIP_ADMIN_CLIENT_SECRET);
 		admin_client_id = getValueForKey(MOSIP_ADMIN_CLIENT_ID);
 		admin_app_id = getValueForKey(MOSIP_ADMIN_APP_ID);
-//		regproc_client_secret = getValueForKey(MOSIP_REG_CLIENT_SECRET);
-//		regproc_client_id = getValueForKey(MOSIP_REG_CLIENT_ID);
-//		regproc_app_id = getValueForKey(MOSIP_REGCLIENT_APP_ID);
-//		ida_client_secret = getValueForKey(MOSIP_IDA_CLIENT_SECRET);
-//		ida_client_id = getValueForKey(MOSIP_IDA_CLIENT_ID);
-//		ida_app_id = getValueForKey(MOSIP_IDA_APP_ID);
-//		hotlist_client_secret = getValueForKey(MOSIP_HOTLIST_CLIENT_SECRET);
-//		hotlist_client_id = getValueForKey(MOSIP_HOTLIST_CLIENT_ID);
-//		hotlist_app_id = getValueForKey(MOSIP_HOTLIST_APP_ID);
 		automation_client_secret = getValueForKey(MOSIP_AUTOMATION_CLIENT_SECRET);
 		automation_client_id = getValueForKey(MOSIP_AUTOMATION_CLIENT_ID);
-//		automation_app_id = getValueForKey(MOSIP_AUTOMATION_APP_ID);
 		s3_host = getValueForKey(S3_HOST);
 		s3_region = getValueForKey(S3_REGION);
 		s3_user_key = getValueForKey(S3_USER_KEY);
@@ -243,157 +227,38 @@ public class ConfigManager {
 		hibernate_dialect = getValueForKey(HIBERNATE_DIALECT);
 		hibernate_show_sql = getValueForKey(HIBERNATE_SHOW_SQL);
 		hibernate_current_session_context_class = getValueForKey(HIBERNATE_CONTEXT_CLASS);
-//		audit_db_user = getValueForKey(AUDIT_DB_USER);
-//		audit_db_pass = getValueForKey(AUDIT_DB_PASS);
-//		audit_db_schema = getValueForKey(AUDIT_DB_SCHEMA);
-//		ida_db_user = getValueForKey(IDA_DB_USER);
-//		ida_db_pass = getValueForKey(IDA_DB_PASS);
-//		ida_db_schema = getValueForKey(IDA_DB_SCHEMA);
-//		pms_db_user = getValueForKey(PMS_DB_USER);
-//		pms_db_pass = getValueForKey(PMS_DB_PASS);
-//		pms_db_schema = getValueForKey(PMS_DB_SCHEMA);
-//		km_db_user = getValueForKey(KM_DB_USER);
-//		km_db_pass = getValueForKey(KM_DB_PASS);
-//		km_db_schema = getValueForKey(KM_DB_SCHEMA);
 		master_db_user = getValueForKey(MASTER_DB_USER);
 		master_db_pass = getValueForKey(MASTER_DB_PASS);
 		master_db_schema = getValueForKey(MASTER_DB_SCHEMA);
 		iam_external_url = getValueForKey(IAM_EXTERNAL_URL);
 		logger.info("keycloakendpoint from config manager::" + iam_external_url);
-//
 		iam_realm_id = getValueForKey(IAM_REALM_ID);
 		iam_users_to_create = getValueForKey(IAM_USERS_TO_CREATE);
 		iam_users_password = getValueForKey(IAM_USERS_PASSWORD);
-//
 		admin_client_secret = System.getenv(MOSIP_ADMIN_CLIENT_SECRET) == null
 				? propsKernel.getProperty(MOSIP_ADMIN_CLIENT_SECRET)
 				: System.getenv(MOSIP_ADMIN_CLIENT_SECRET);
-//
 		propsKernel.setProperty(MOSIP_ADMIN_CLIENT_SECRET, admin_client_secret);
-//
-//		authDemoServicePort = System.getenv(AUTH_DEMO_SERVICE_PORT) == null
-//				? propsKernel.getProperty(AUTH_DEMO_SERVICE_PORT)
-//				: System.getenv(AUTH_DEMO_SERVICE_PORT);
-//		propsKernel.setProperty(AUTH_DEMO_SERVICE_PORT, authDemoServicePort);
-//
-//		authDemoServiceBaseUrl = System.getenv(AUTH_DEMO_SERVICE_BASE_URL) == null
-//				? propsKernel.getProperty(AUTH_DEMO_SERVICE_BASE_URL)
-//				: System.getenv(AUTH_DEMO_SERVICE_BASE_URL);
-//		propsKernel.setProperty(AUTH_DEMO_SERVICE_BASE_URL, authDemoServiceBaseUrl);
-//
-//		mountPath = System.getenv(MOUNT_PATH) == null ? propsKernel.getProperty(MOUNT_PATH) : System.getenv(MOUNT_PATH);
-//		propsKernel.setProperty(MOUNT_PATH, mountPath);
 		reportExpirationInDays = System.getenv(REPORT_EXPIRATION_IN_DAYS) == null
 				? propsKernel.getProperty(REPORT_EXPIRATION_IN_DAYS)
 				: System.getenv(REPORT_EXPIRATION_IN_DAYS);
-		propsKernel.setProperty(REPORT_EXPIRATION_IN_DAYS, reportExpirationInDays);		
-//		authCertsPath = System.getenv(AUTHCERTS_PATH) == null ? propsKernel.getProperty(AUTHCERTS_PATH) : System.getenv(AUTHCERTS_PATH);
-//		propsKernel.setProperty(AUTHCERTS_PATH, authCertsPath);
-//		
-//		mountPathForScenario = System.getenv(MOUNT_PATH_FOR_SCENARIO) == null ? propsKernel.getProperty(MOUNT_PATH_FOR_SCENARIO) : System.getenv(MOUNT_PATH_FOR_SCENARIO);
-//		propsKernel.setProperty(MOUNT_PATH_FOR_SCENARIO, mountPathForScenario);
-//		
-//		packetUtilityBaseUrl = System.getenv(PACKET_UTILITY_BASE_URL) == null ? propsKernel.getProperty(PACKET_UTILITY_BASE_URL) : System.getenv(PACKET_UTILITY_BASE_URL);
-//		propsKernel.setProperty(PACKET_UTILITY_BASE_URL, packetUtilityBaseUrl);
-//		
+		propsKernel.setProperty(REPORT_EXPIRATION_IN_DAYS, reportExpirationInDays);			
+		
 		push_reports_to_s3 =System.getenv(PUSH_TO_S3) == null ? propsKernel.getProperty(PUSH_TO_S3) : System.getenv(PUSH_TO_S3);
 		propsKernel.setProperty(PUSH_TO_S3, push_reports_to_s3);
-//		
-//		enableDebug =System.getenv(ENABLE_DEBUG) == null ? propsKernel.getProperty(ENABLE_DEBUG) : System.getenv(ENABLE_DEBUG);
-//		propsKernel.setProperty(ENABLE_DEBUG, enableDebug);
-//		
-//		threadCount =System.getenv(THREAD_COUNT) == null ? propsKernel.getProperty(THREAD_COUNT) : System.getenv(THREAD_COUNT);
-//		propsKernel.setProperty(THREAD_COUNT, threadCount);
-//		
-//		langselect =System.getenv(LANG_SELECT) == null ? propsKernel.getProperty(LANG_SELECT) : System.getenv(LANG_SELECT);
-//		propsKernel.setProperty(LANG_SELECT, langselect);
-		
-		//enableDebug threadCount  langselect
 
+		admin_userName =System.getenv(ADMIN_USERNAME) == null ? propsKernel.getProperty(ADMIN_USERNAME) : System.getenv(ADMIN_USERNAME);
+		propsKernel.setProperty(ADMIN_USERNAME, admin_userName);
 	}
 
-//	public static String getAuthDemoServicePort() {
-//		return authDemoServicePort;
-//	}
-//
-//	public static String getAuthDemoServiceBaseUrl() {
-//		return authDemoServiceBaseUrl;
-//
-//	}
-//	
-//	public static String getLangselect() {
-//		return langselect;
-//
-//	}
-//	
-//	public static String getThreadCount() {
-//		return threadCount;
-//
-//	}
-//	
-//	public static String getEnableDebug() {
-//		return enableDebug;
-//
-//	}
-//
-//	public static String getmountPath() {
-//		return mountPath;
-//	}
-//	
-//	public static String getmountPathForScenario() {
-//		return mountPathForScenario;
-//	}
-//	
-//	public static String getpacketUtilityBaseUrl() {
-//		return packetUtilityBaseUrl;
-//	}
-//	
-//	public static String getauthCertsPath() {
-//		return authCertsPath;
-//	}
-//
-//	public static Properties init(String abc) {
-//		propsKernel = getproperty(TestRunner.getResourcePath() + "/" + "config/Kernel.properties");
-//
-//		return propsKernel;
-//	}
-//
-//	public static String getPmsClientSecret() {
-//		return pms_client_secret;
-//	}
-//
-//	public static String getPmsClientId() {
-//		return pms_client_id;
-//	}
-//
-//	public static String getPmsAppId() {
-//		return pms_app_id;
-//	}
-//
-//	public static String getResidentClientSecret() {
-//		return resident_client_secret;
-//	}
-//
-//	public static String getResidentClientId() {
-//		return resident_client_id;
-//	}
-//
-//	public static String getResidentAppId() {
-//		return resident_app_id;
-//	}
-//
-//	public static String getMPartnerMobileClientId() {
-//		return mpartner_mobile_client_id;
-//	}
-//
-//	public static String getMPartnerMobileClientSecret() {
-//		return mpartner_mobile_client_secret;
-//	}
-//
+	public static String getAdminUserName() {
+		return admin_userName;
+	}
+	
 	public static String getAdminClientSecret() {
 		return admin_client_secret;
 	}
-//
+	
 	public static String getAdminClientId() {
 		return admin_client_id;
 	}
@@ -457,11 +322,6 @@ public class ConfigManager {
 	public static String getAutomationClientId() {
 		return automation_client_id;
 	}
-//
-//	public static String getAutomationAppId() {
-//		return automation_app_id;
-//	}
-//
 	public static String getS3Host() {
 		return s3_host;
 	}
