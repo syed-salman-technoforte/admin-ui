@@ -87,6 +87,9 @@ public class ConfigManager {
 	private static String MASTER_DB_SCHEMA = "master_db_schema";
 //
 	private static String IAM_EXTERNAL_URL = "keycloak-external-url";
+	private static String IAM_ADMINPORTAL_PATH = "adminPortalPath";
+	private static String IAM_APIENVUSER = "apiEnvUser";
+	private static String IAM_APIINTERNALENDPOINT = "apiInternalEndPoint";
 	private static String IAM_REALM_ID = "keycloak-realm-id";
 	private static String IAM_USERS_TO_CREATE = "iam-users-to-create";
 	private static String IAM_USERS_PASSWORD = "iam-users-password";
@@ -174,6 +177,9 @@ public class ConfigManager {
 	private static String master_db_schema;
 //
 	private static String iam_external_url;
+	private static String iam_adminportal_path;
+	private static String iam_apienvuser;
+	private static String iam_apiinternalendpoint;
 	private static String iam_realm_id;
 	private static String iam_users_to_create;
 	private static String iam_users_password;
@@ -230,8 +236,24 @@ public class ConfigManager {
 		master_db_user = getValueForKey(MASTER_DB_USER);
 		master_db_pass = getValueForKey(MASTER_DB_PASS);
 		master_db_schema = getValueForKey(MASTER_DB_SCHEMA);
+		//admintest data
 		iam_external_url = getValueForKey(IAM_EXTERNAL_URL);
 		logger.info("keycloakendpoint from config manager::" + iam_external_url);
+		iam_adminportal_path =System.getenv(IAM_ADMINPORTAL_PATH) == null
+				? propsKernel.getProperty(IAM_ADMINPORTAL_PATH)
+				: System.getenv(IAM_ADMINPORTAL_PATH);
+		
+		logger.info("adminportal_path from config manager::" + iam_adminportal_path);
+		iam_apienvuser = System.getenv(IAM_APIENVUSER) == null
+				? propsKernel.getProperty(IAM_APIENVUSER)
+				: System.getenv(IAM_APIENVUSER);
+		logger.info("apienvuser from config manager::" + iam_apienvuser);
+		iam_apiinternalendpoint = System.getenv(IAM_APIINTERNALENDPOINT) == null
+				? propsKernel.getProperty(IAM_APIINTERNALENDPOINT)
+				: System.getenv(IAM_APIINTERNALENDPOINT);
+		logger.info("apiinternalendpoint from config manager::" + iam_apiinternalendpoint);
+		
+		//admin testdata end
 		iam_realm_id = getValueForKey(IAM_REALM_ID);
 		iam_users_to_create = getValueForKey(IAM_USERS_TO_CREATE);
 		iam_users_password = getValueForKey(IAM_USERS_PASSWORD);
@@ -487,6 +509,15 @@ public class ConfigManager {
 		return prop;
 	}
 
+	public static String getiam_adminportal_path() {
+		return iam_adminportal_path;
+	}
+	public static String getiam_apienvuser() {
+		return iam_apienvuser;
+	}
+	public static String getiam_apiinternalendpoint() {
+		return iam_apiinternalendpoint;
+	}
 //	public static String getAuthDemoServiceUrl() {
 //		return ConfigManager.getAuthDemoServiceBaseUrl() + ":" + ConfigManager.getAuthDemoServicePort();
 //	}
