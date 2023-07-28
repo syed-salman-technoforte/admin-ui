@@ -55,8 +55,8 @@ public class BaseClass {
 	protected Map<String, Object> vars;
 	protected JavascriptExecutor js;
 	protected String langcode;
-	protected String envPath = System.getProperty("path");
-	protected String env=System.getProperty("env.user");
+	protected String envPath = ConfigManager.getiam_adminportal_path();
+	protected String env=ConfigManager.getiam_apienvuser();
 	public static String userid = KeycloakUserManager.moduleSpecificUser;
 	protected String[] allpassword = ConfigManager.getIAMUsersPassword().split(",");
 	protected String password = allpassword[0];
