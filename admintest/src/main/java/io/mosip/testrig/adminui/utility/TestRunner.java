@@ -39,7 +39,7 @@ public class TestRunner {
 		//startTestRunner();
 		
 		testNg=new TestNG();
-		
+		//testNg.addListener(MyListener.class);
 		String listExcludedGroups=JsonUtil.JsonObjParsing(Commons.getTestData(),"setExcludedGroups");
 		testNg.setExcludedGroups(listExcludedGroups);
 		testNg.setTestClasses(new Class[] {
@@ -59,6 +59,7 @@ public class TestRunner {
 		});
 	//	testNg.addListener(tla);
 		testNg.run();
+		
 		
 	}
 	public static String getGlobalResourcePath() {

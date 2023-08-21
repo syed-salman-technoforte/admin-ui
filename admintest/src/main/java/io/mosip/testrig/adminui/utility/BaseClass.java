@@ -51,7 +51,7 @@ import org.testng.annotations.Test;
 
 public class BaseClass {
 	private static final Logger logger = Logger.getLogger(TestRunner.class);
-	protected WebDriver driver;
+	protected static WebDriver driver;
 	protected Map<String, Object> vars;
 	protected JavascriptExecutor js;
 	protected String langcode;
