@@ -48,8 +48,7 @@ public class DeviceTest extends BaseClass{
  
 	   Commons.enter(test,driver, By.id("ipAddress"),"2.2345");
 	//   Commons.enter(test,driver, By.id("validity"),validityDate);
-	   Commons.calendar(validityDate);
-      
+      Commons.calendar(validityDate);
     Commons.dropdown(test,driver,By.id("deviceSpecId"));
     // Commons.dropdown(test,driver,By.id("zone"));
       Commons.dropdown(test,driver,By.id("regCenterId"));

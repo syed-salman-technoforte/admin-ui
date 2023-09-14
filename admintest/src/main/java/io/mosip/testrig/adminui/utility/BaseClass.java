@@ -88,14 +88,17 @@ public class BaseClass {
 		   test=extent.createTest(getCommitId(),getCommitId());
 		  
 		ChromeOptions options = new ChromeOptions();
+		
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		
 	
 		if(headless.equalsIgnoreCase("yes")) {
 			options.addArguments("--headless=new");
 		}
-		WebDriverManager.chromedriver().setup();
-		driver=new ChromeDriver(options);
+	
+	WebDriverManager.chromedriver().setup();
+	driver=new ChromeDriver(options);
+		 
 		
 //		
 		js = (JavascriptExecutor) driver;
