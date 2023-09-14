@@ -427,6 +427,7 @@ public class Commons  extends BaseClass{
 	}
 	return preappend;
 	  }
+	
 	public static void calendar(String date) {
 		String a=date.replaceAll("/","");
 	    String mon="";
@@ -461,6 +462,5 @@ public class Commons  extends BaseClass{
 			e.printStackTrace();
 		}
 	}
-	
 	
 }
