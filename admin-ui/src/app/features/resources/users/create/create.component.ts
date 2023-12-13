@@ -193,7 +193,10 @@ export class CreateComponent{
         case: 'MESSAGE'
       },
       disableClose: true
-    }).afterClosed().subscribe(() => this.router.navigateByUrl('admin/resources/devices/view'));
+    }).afterClosed()
+    .subscribe(() => {
+      this.router.navigateByUrl('admin/resources/devices/view')
+    });
   }
 
   ngOnDestroy() {
@@ -333,9 +336,7 @@ export class CreateComponent{
         if (response.response.data) {
           this.data = response.response.data;
           if(url === "zoneuser"){
-            this.primaryData = {userId:this.data[0].userId, zone:this.data[0].zoneCode, regCenterId:this.data[0].regCenterId, name: this.data[0].userName}
-          }else{
-            this.primaryData = {userId:this.data[0].userId, zone:this.data[0].zoneCode, regCenterId:this.data[0].regCenterId, name: this.data[0].userName}
+          this.primaryData = {userId:this.data[0].userId, zone:this.data[0].zoneCode, regCenterId:this.data[0].regCenterId, name: this.data[0].userName};
           }
           this.initializeheader();
         } else {

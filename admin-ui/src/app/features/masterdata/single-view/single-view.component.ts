@@ -213,11 +213,11 @@ export class SingleViewComponent implements OnDestroy {
         disableClose: true
       })
       .afterClosed()
-      .subscribe(() =>
+      .subscribe(() => {
         this.router.navigateByUrl(
           `admin/masterdata/${this.masterdataType}/view`
-        )
-      );
+        );
+      });
   }
 
   changePage(location: string) {

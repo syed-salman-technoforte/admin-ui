@@ -462,9 +462,9 @@ export class EditComponent {
         disableClose: true
       })
       .afterClosed()
-      .subscribe(() =>
+      .subscribe(() => {
         this.router.navigateByUrl(`admin/resources/centers/view`)
-      );
+      });
   }
 
   handleChangeSecondaryLang = (fieldName: string) => {
