@@ -18,7 +18,7 @@
 		"14machineTypesCRUD": "MT",
 		"15templateCRUD": "T",
 		"BELOW_ARE_STATIC_KEYWORDS": "We are using this setExcludedGroups to exclude scenarios",
-		"setExcludedGroups": "BU",
+		"setExcludedGroups": "BL,CTR,CT,DS,D,DT,DOC,DOCT,DF,H,MS,M,MT,T",
 		"holidayDateCenter": "10/12/2025",
 		"holidayDate": "10/09/2025",
 		"validityDate":"10/12/2026",
