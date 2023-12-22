@@ -14,19 +14,24 @@
             <div><img src="./assets/images/Packet_Status.png" alt="" height="100px" width="100px"></div>
             <div>
                 <table>
+                    <caption>Packet Status Information</caption>
                     <tr>
-                        <td>{{'packet-status.id' | translate}}</td><td><strong>{{data[0].registrationId}}</strong></td>
+                        <th>{{'packet-status.id' | translate}}</th>
+                        <td><strong>{{data[0].registrationId}}</strong></td>
                     </tr>
                     <tr>
-                        <td>{{'packet-status.status' | translate}}</td><td><strong>{{statusCheck}}</strong></td>
+                        <th>{{'packet-status.status' | translate}}</th>
+                        <td><strong>{{statusCheck}}</strong></td>
                     </tr>
                 </table>
             </div>
             <div>
                 <table>
+                    <caption>Timeline</caption>
                     <tr (click)="viewMore()">
-                        <td *ngIf="!showTimeline">{{'packet-status.viewMore' | translate}}</td>
-                        <td *ngIf="showTimeline" >{{'packet-status.viewLess' | translate}}</td><td>
+                        <th *ngIf="!showTimeline">{{'packet-status.viewMore' | translate}}</th>
+                        <th *ngIf="showTimeline">{{'packet-status.viewLess' | translate}}</th>
+                        <td>
                             <i *ngIf="!showTimeline" class="material-icons">keyboard_arrow_down</i>
                             <i *ngIf="showTimeline" class="material-icons">keyboard_arrow_up</i>
                         </td>
@@ -50,6 +55,10 @@
             <div><img src="./assets/images/Packet_Status.png" alt="" height="100px" width="100px"></div>
             <div>
                 <table>
+                    <caption>Error Information</caption>
+                    <tr>
+                        <th>Error Message</th>
+                    </tr>
                     <tr>
                         <td><strong>{{errorMessage}}</strong></td>
                     </tr>

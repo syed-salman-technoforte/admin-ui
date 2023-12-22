@@ -5,6 +5,7 @@
     <h2 class="filter-heading">{{ input.title[primaryLangCode] }}</h2>
     <mat-divider></mat-divider>
     <table class="mat-table">
+      <caption>Missing Data Table</caption>
       <tr class="mat-row sticky-header" >
         <th class="mat-header-cell table-header sticky-header"  *ngFor="let col of input.columnNames;">
           <span>{{col[primaryLangCode]}}</span>
@@ -180,6 +181,7 @@
       >
         <img
           src="assets/images/refresh.png"
+          alt="Refresh Icon"
           height="15px; width:12px;"
         />&nbsp;{{ "filters.footerButtons.resetTxt" | translate }}
       </button>
@@ -238,6 +240,7 @@
 <div class="pop-up" *ngIf="input.case === 'MESSAGE'">
   <img
     src="assets/images/icon_Suceess right.png"
+    alt="Success Icon"
     height="45px"
     width="45px"
     class="success-img"

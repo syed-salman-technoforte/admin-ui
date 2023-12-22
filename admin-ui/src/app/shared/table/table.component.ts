@@ -173,42 +173,30 @@ export class TableComponent implements OnInit, OnChanges {
       this.ellipsisList = JSON.parse(JSON.stringify(this.buttonList));
       if (!this.isUser) {
         // user mapping center menu options
-        this.ellipsisList.filter((values, i) => {
-          values.filter(value => {
-            if (value.buttonName.eng === 'Activate') {
-              const index = this.ellipsisList[i].indexOf(value);
-              this.ellipsisList[i].splice(index, 1);
-            }
-          })
+        this.ellipsisList.forEach((values, i) => {
+          this.ellipsisList[i] = values.filter(value => {
+            return value.buttonName.eng !== 'Activate';
+          });
         });
       } else{
-      this.ellipsisList.filter(values => {
-        if (values.buttonName.eng === 'Activate') {
-          const index = this.ellipsisList.indexOf(values);
-          this.ellipsisList.splice(index, 1);
-        }
-      });
+        this.ellipsisList = this.ellipsisList.filter(values => {
+          return values.buttonName.eng !== 'Activate';
+        });
     }
     } else if (data.isActive === false) {
       // this.ellipsisList = [...this.buttonList];
       this.ellipsisList = JSON.parse(JSON.stringify(this.buttonList));
       if (!this.isUser) {
         // user mapping center menu options
-        this.ellipsisList.filter((values, i) => {
-          values.filter(value => {
-            if (value.buttonName.eng === 'Deactivate') {
-              const index = this.ellipsisList[i].indexOf(value);
-              this.ellipsisList[i].splice(index, 1);
-            }
-          })
+        this.ellipsisList.forEach((values, i) => {
+          this.ellipsisList[i] = values.filter(value => {
+            return value.buttonName.eng !== 'Deactivate';
+          });
         });
       } else{
-      this.ellipsisList.filter(values => {
-        if (values.buttonName.eng === 'Deactivate') {
-          const index = this.ellipsisList.indexOf(values);
-          this.ellipsisList.splice(index, 1);
-        }
-      });
+        this.ellipsisList = this.ellipsisList.filter(values => {
+            return values.buttonName.eng !== 'Deactivate';
+          });
     }
     }else{
       this.ellipsisList = [...this.buttonList];

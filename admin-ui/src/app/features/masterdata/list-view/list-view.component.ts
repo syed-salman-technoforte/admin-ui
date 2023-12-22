@@ -81,8 +81,8 @@ export class ListViewComponent implements OnDestroy {
     }
   }
 
-  loadBlacklistedWords() {
-    return new Promise(async (resolve, reject) => {
+  loadBlacklistedWords(): void {
+    new Promise(async (resolve, reject) => {
       const data = [];
       await this.getMasterDataTypeValues('all').then(response => {
         if (response['data']) {

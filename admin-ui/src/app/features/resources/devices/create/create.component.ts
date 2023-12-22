@@ -330,7 +330,10 @@ export class CreateComponent{
         case: 'MESSAGE'
       },
       disableClose: true
-    }).afterClosed().subscribe(() => this.router.navigateByUrl('admin/resources/devices/view'));
+    }).afterClosed()
+    .subscribe(() => {
+      this.router.navigateByUrl('admin/resources/devices/view')
+    });
   }
 
   setHeaderData() {
@@ -581,8 +584,8 @@ export class CreateComponent{
         disableClose: true
       })
       .afterClosed()
-      .subscribe(() =>
+      .subscribe(() => {
         this.router.navigateByUrl(`admin/resources/devices/view`)
-      );
+      });
   }
 }

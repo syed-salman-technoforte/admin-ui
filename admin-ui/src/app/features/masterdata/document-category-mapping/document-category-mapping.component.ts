@@ -56,15 +56,16 @@ export class DocumentCategoryMappingComponent implements OnInit {
         });
         this.docCategoryMapping.setMappedDoc(this.allDocCategoryList[0]);
         this.docCategoryMapping.currentMappedDocList.subscribe(response => {
-          this.docCategoryMapping.getMappedDoc(response.code, response.langCode).subscribe(async mappedDoc => {
-            if (mappedDoc && mappedDoc.response) {
-              await this.getUnMappedDoc();
-              this.subtractingMappedDocFromUnMappedDoc(mappedDoc.response, this.unMappedDoc);
-              this.showSpinner = false;
-            } else {
-              this.mappedDocList = [];
-              this.unMappedDoc = [];
-            }
+          this.docCategoryMapping.getMappedDoc(response.code, response.langCode).subscribe(mappedDoc => {
+              if (mappedDoc && mappedDoc.response) {
+                  this.getUnMappedDoc().then(() => {
+                      this.subtractingMappedDocFromUnMappedDoc(mappedDoc.response, this.unMappedDoc);
+                      this.showSpinner = false;
+                  });
+              } else {
+                  this.mappedDocList = [];
+                  this.unMappedDoc = [];
+              }
           });
         });
       }
@@ -125,18 +126,19 @@ export class DocumentCategoryMappingComponent implements OnInit {
     this.selectedItem = item['code'];
     this.docCategoryMapping.setMappedDoc(item);
     this.docCategoryMapping.currentMappedDocList.subscribe(response => {
-      this.docCategoryMapping.getMappedDoc(response.code, response.langCode).subscribe(async data => {
+      this.docCategoryMapping.getMappedDoc(response.code, response.langCode).subscribe(data => {
         if (data && data.response && data.response.documents) {
-          await this.getUnMappedDoc();
-          this.subtractingMappedDocFromUnMappedDoc(data.response.documents, this.unMappedDoc);
-          this.showSpinner = false;
+            this.getUnMappedDoc().then(() => {
+                this.subtractingMappedDocFromUnMappedDoc(data.response.documents, this.unMappedDoc);
+                this.showSpinner = false;
+            });
         }
       });
     });
   }
 
   onClose(mappedItem: object, index: number) {
-    this.docCategoryMapping.updateUnMappeddoc(this.selectedItem, mappedItem['code']).subscribe(async data => {
+    this.docCategoryMapping.updateUnMappeddoc(this.selectedItem, mappedItem['code']).subscribe(data => {
       //console.log('Data', data);
     });
     if (mappedItem && (index >= 0)) {
@@ -150,7 +152,7 @@ export class DocumentCategoryMappingComponent implements OnInit {
   }
 
   onAdd(unMappedItem: object, index: number) {
-      this.docCategoryMapping.updateMappedDoc(this.selectedItem, unMappedItem['code']).subscribe(async data => {
+      this.docCategoryMapping.updateMappedDoc(this.selectedItem, unMappedItem['code']).subscribe(data => {
         //console.log('Data', data);
       });
     if (unMappedItem && (index >= 0) ) {
