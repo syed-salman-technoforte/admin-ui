@@ -38,7 +38,7 @@ public class MachineTest extends BaseClass{
 	  String signPublicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"signPublicKey");
 	  
 	  Commons.click(test,driver,By.id("admin/resources"));
-    Commons.click(test,driver,By.xpath("//a[@href='#/admin/resources/machines']"));
+    Commons.click(test,driver,By.id("/admin/resources/machines"));
     Commons.click(test,driver,By.id("Create Machine"));
     test.log(Status.INFO, "Click on Create Machine");
     Commons.enter(test,driver,By.id("name"),data);
