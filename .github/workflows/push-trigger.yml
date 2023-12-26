@@ -142,7 +142,7 @@ jobs:
         include:
           - SERVICE_LOCATION: 'admintest'
             SERVICE_NAME: 'admintest'
-            BUILD_ARTIFACT: 'admintest'
+            BUILD_ARTIFACT: 'admintest-local'
       fail-fast: false
     name: ${{ matrix.SERVICE_NAME }}
     uses: mosip/kattu/.github/workflows/docker-build.yml@master
