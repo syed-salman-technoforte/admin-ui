@@ -94,8 +94,7 @@ public class BaseClass {
 		   if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
 				String configFilePath ="/usr/bin/chromedriver";
 				System.setProperty("webdriver.chrome.driver", configFilePath);
-				System.setProperty("webdriver.chrome.logfile", "/usr/bin/chromedriver.log");
-				System.setProperty("webdriver.chrome.verboseLogging", "true");
+				
 			}else {
 				WebDriverManager.chromedriver().setup();
 			}
