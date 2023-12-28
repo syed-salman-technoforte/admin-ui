@@ -39,7 +39,9 @@ public class MachineTest extends BaseClass{
 	  
 	  Commons.click(test,driver,By.id("admin/resources"));
     Commons.click(test,driver,By.id("/admin/resources/machines"));
-    Commons.click(test,driver,By.id("Create Machine"));
+//    Commons.click(test,driver,By.id("Create Machine"));
+    Thread.sleep(4000);
+    driver.findElement(By.id("Create Machine")).click();
     test.log(Status.INFO, "Click on Create Machine");
     Commons.enter(test,driver,By.id("name"),data);
     Commons.enter(test,driver,By.id("serialNumber"),"1234567");
