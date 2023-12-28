@@ -153,7 +153,7 @@ public class BaseClass {
 	        if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
 	            // Use remote WebDriver for Linux
 	            options.addArguments("--no-sandbox"); // Add additional arguments if needed
-	            driver = new RemoteWebDriver(new URL("http://localhost:4444/grid/console"), options);
+	            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
 	        } else {
 	            // Use local WebDriver for non-Linux
 	            WebDriverManager.chromedriver().setup();
