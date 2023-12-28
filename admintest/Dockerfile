@@ -27,7 +27,8 @@ ENV work_dir=/home/${container_user}/
 # install packages and create user
 RUN groupadd -g ${container_user_gid} ${container_user_group} \
     && useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/bash -m ${container_user} -d ${work_dir}
-
+    
+docker run -d -p 4444:4444 --name selenium-hub --shm-size=2g selenium/hub
 # select container user for all tasks
 USER ${container_user_uid}:${container_user_gid}
 
