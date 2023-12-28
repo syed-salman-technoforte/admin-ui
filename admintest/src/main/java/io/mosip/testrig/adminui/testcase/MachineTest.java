@@ -44,6 +44,7 @@ public class MachineTest extends BaseClass{
 		Commons.click(test,driver,By.id("admin/resources"));
 		logger.info(driver.findElement(By.id("/admin/resources/machines")).isDisplayed()+"2");
 		Commons.click(test,driver,By.id("/admin/resources/machines"));
+		Thread.sleep(20000);
 		logger.info(driver.findElement(By.id("Create Machine")).isDisplayed()+"3");
 		Commons.click(test,driver,By.id("Create Machine"));
 		test.log(Status.INFO, "Click on Create Machine");
