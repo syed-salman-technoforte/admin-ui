@@ -43,9 +43,9 @@ public class MachineTest extends BaseClass{
     Thread.sleep(4000);
     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
  //   driver.findElement(By.id("Create Machine")).click();
-    WebElement createMachineButton = driver.findElement(By.id("Create Machine"));
-    Actions actions = new Actions(driver);
-    actions.moveToElement(createMachineButton).click().perform();
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebElement createMachineButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("Create Machine")));
+    createMachineButton.click();
     test.log(Status.INFO, "Click on Create Machine");
     Commons.enter(test,driver,By.id("name"),data);
     Commons.enter(test,driver,By.id("serialNumber"),"1234567");
