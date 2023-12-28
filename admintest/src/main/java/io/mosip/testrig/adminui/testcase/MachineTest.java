@@ -45,13 +45,12 @@ public class MachineTest extends BaseClass{
 		Commons.click(test,driver,By.id("admin/resources"));
 		logger.info(driver.findElement(By.id("/admin/resources/machines")).isDisplayed()+"2");
 		Commons.click(test,driver,By.id("/admin/resources/machines"));
-	//	Commons.click(test,driver,By.id("/admin/resources/machines"));
 		  List<WebElement> allElements = driver.findElements(By.xpath("//*"));
 
 	        // Print XPath for each element
 	        for (WebElement element : allElements) {
-	            String xpath = getXPath(element);
-	            logger.info(xpath);
+	          
+	            logger.info(element);
 	        }
 		Thread.sleep(20000);
 		logger.info(driver.findElement(By.id("Create Machine")).isDisplayed()+"3");
