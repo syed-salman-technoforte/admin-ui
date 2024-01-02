@@ -95,7 +95,7 @@ public class BaseClass {
 	    DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 
 	    // Set Docker Selenium Hub URL
-	    String hubUrl = "http://localhost:4444/wd/hub";  // Replace with your Docker host's IP or hostname
+	    String hubUrl = "http://10.42.4.48:4444/wd/hub";  // Replace with your Docker host's IP or hostname
 
 	    if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
 	        capabilities.setCapability("webdriver.chrome.driver", "/usr/bin/chromedriver");
