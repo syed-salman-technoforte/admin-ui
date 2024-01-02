@@ -1,4 +1,4 @@
-FROM selenium/standalone-chrome:latest
+FROM -d -p 4444:4444 --shm-size="2g" selenium/standalone-chrome:latest
 
 USER root
 
