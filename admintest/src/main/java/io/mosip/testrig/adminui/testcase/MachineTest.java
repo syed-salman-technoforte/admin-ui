@@ -1,10 +1,8 @@
 package io.mosip.testrig.adminui.testcase;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -30,79 +28,53 @@ import com.aventstack.extentreports.Status;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 import io.mosip.testrig.adminui.utility.JsonUtil;
-import io.mosip.testrig.adminui.utility.TestRunner;
 public class MachineTest extends BaseClass{
-	private static final Logger logger = Logger.getLogger(MachineTest.class);
-	@Test(groups = "M")
-	public void machineCRUD() throws Exception {
+  @Test(groups = "M")
+  public void machineCRUD() throws Exception {
+	  test=extent.createTest("MachineTest", "verify Login");
+	  String holidayDateCenter=JsonUtil.JsonObjParsing(Commons.getTestData(),"holidayDateCenter");
+	  String publicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"publicKey");
 
-		test=extent.createTest("MachineTest", "verify Login");
-		String holidayDateCenter=JsonUtil.JsonObjParsing(Commons.getTestData(),"holidayDateCenter");
-		String publicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"publicKey");
+	  String signPublicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"signPublicKey");
+	  
+	  Commons.click(test,driver,By.id("admin/resources"));
+    Commons.click(test,driver,By.xpath("//a[@href='#/admin/resources/machines']"));
+    Commons.click(test,driver,By.id("Create Machine"));
+    test.log(Status.INFO, "Click on Create Machine");
+    Commons.enter(test,driver,By.id("name"),data);
+    Commons.enter(test,driver,By.id("serialNumber"),"1234567");
+    Commons.enter(test,driver,By.id("macAddress"),"1.2.3.4.5.6");
+    Commons.enter(test,driver,By.id("ipAddress"),"2.3.4.5.6");
+    test.log(Status.INFO, "ENter IpAddress");
+ //   Commons.enter(test,driver,By.id("validity"),holidayDateCenter);
+    Commons.calendar(holidayDateCenter);
+    Commons.dropdown(test,driver,By.id("machineSpecId"));
+    Commons.enter(test,driver,By.id("publicKey"),publicKey);
+    		
+    		Commons.enter(test,driver,By.id("signPublicKey"),signPublicKey);
+    		try{   Commons.dropdown(test,driver, By.id("zone"));
+    		 
+    		 }catch(Exception e) {
+    			 test.log(Status.INFO, e);
+    		 }
+    Commons.dropdown(test,driver,By.id("regCenterId"));
+    
+    
+    
+   	Commons.createRes(test,driver);
+ 	Commons.filter(test,driver, By.id("name"), data);
+ 	
 
-		String signPublicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"signPublicKey");
-		logger.info(driver.findElement(By.id("admin/resources")).isDisplayed()+"1");
-		Commons.click(test,driver,By.id("admin/resources"));
-		logger.info(driver.findElement(By.id("/admin/resources/machines")).isDisplayed()+"2");
-		Commons.click(test,driver,By.id("/admin/resources/machines"));
-		  List<WebElement> allElements = driver.findElements(By.xpath("//*"));
-
-	        // Print XPath for each element
-	        for (WebElement element : allElements) {
-	          
-	            logger.info(element);
-	        }
-		Thread.sleep(20000);
-		logger.info(driver.findElement(By.id("Create Machine")).isDisplayed()+"3");
-		Commons.click(test,driver,By.id("Create Machine"));
-		test.log(Status.INFO, "Click on Create Machine");
-		Commons.enter(test,driver,By.id("name"),data);
-		Commons.enter(test,driver,By.id("serialNumber"),"1234567");
-		Commons.enter(test,driver,By.id("macAddress"),"1.2.3.4.5.6");
-		Commons.enter(test,driver,By.id("ipAddress"),"2.3.4.5.6");
-		test.log(Status.INFO, "ENter IpAddress");
-		//   Commons.enter(test,driver,By.id("validity"),holidayDateCenter);
-		Commons.calendar(holidayDateCenter);
-		Commons.dropdown(test,driver,By.id("machineSpecId"));
-		Commons.enter(test,driver,By.id("publicKey"),publicKey);
-
-		Commons.enter(test,driver,By.id("signPublicKey"),signPublicKey);
-		try{   Commons.dropdown(test,driver, By.id("zone"));
-
-		}catch(Exception e) {
-			test.log(Status.INFO, e);
-		}
-		Commons.dropdown(test,driver,By.id("regCenterId"));
-
-
-
-		Commons.createRes(test,driver);
-		Commons.filter(test,driver, By.id("name"), data);
-
-
-		Commons.editRes(test,driver,data+1,By.id("name"));
-		test.log(Status.INFO, "Click on Edit");
-		Commons.filter(test,driver, By.id("name"), data+1);
-
-		Commons.activate(test,driver);
-		test.log(Status.INFO, "Click on Active");
-		Commons.editRes(test,driver,data+2,By.id("name"));
-		Commons.filter(test,driver, By.id("name"), data+2);
-		Commons.deactivate(test,driver);
-		test.log(Status.INFO, "Click on Deactivated");
-		Commons.decommission(test,driver);
-	}
-	 private static String getXPath(WebElement element) {
-	        if (element == null) {
-	            return null;
-	        }
-
-	        if (!element.getAttribute("id").isEmpty()) {
-	            return "//*[@id='" + element.getAttribute("id") + "']";
-	        }
-
-	        // You can add more conditions based on attributes if needed
-
-	        return getXPath(element.findElement(By.xpath(".."))) + "/" + element.getTagName();
-	    }
+ 	Commons.editRes(test,driver,data+1,By.id("name"));
+ 	test.log(Status.INFO, "Click on Edit");
+ 	Commons.filter(test,driver, By.id("name"), data+1);
+ 	
+ 	Commons.activate(test,driver);
+ 	test.log(Status.INFO, "Click on Active");
+ 	Commons.editRes(test,driver,data+2,By.id("name"));
+ 	Commons.filter(test,driver, By.id("name"), data+2);
+ 	Commons.deactivate(test,driver);
+ 	test.log(Status.INFO, "Click on Deactivated");
+ 	Commons.decommission(test,driver);
+  }
 }
