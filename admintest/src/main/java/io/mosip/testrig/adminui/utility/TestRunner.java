@@ -92,7 +92,7 @@ public class TestRunner {
 		
 		System.getProperties().setProperty("testng.outpur.dir", "testng-report");
 		runner.setOutputDirectory("testng-report");
-		System.getProperties().setProperty("emailable.report2.name", "ADMINUI-" + BaseTestCaseFunc.environment + "-"
+		System.getProperties().setProperty("emailable.report2.name", "ADMINUI-" + BaseTestCaseFunc.environment + "-"+System.getProperty("os.name")
 				+ "-run-" + System.currentTimeMillis() + "-report.html");
 
 		runner.run();

@@ -134,7 +134,7 @@ public class BaseClass {
 		}
 		driver.findElement(By.id("username")).sendKeys(userid);
 		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.xpath("//input[@name=\'login\']")).click();
+		driver.findElement(By.xpath("//input[@name='login']")).click();
 	}
 //	  @BeforeMethod
 //	    public void setUp() throws Exception {
