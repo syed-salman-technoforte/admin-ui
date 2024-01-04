@@ -125,7 +125,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 });
             } else {
               if (err.url.includes('validateToken')) {
-
                 this.translateService
                 .getTranslation(this.appService.getConfig().primaryLangCode)
                 .subscribe(response => {
@@ -142,7 +141,8 @@ export class AuthInterceptor implements HttpInterceptor {
                     disableClose: true
                   });
                 });
-
+              }else if(err.url.includes('rid-digital-card')) {
+                console.log("download card");
               }else{
                 this.translateService
                 .getTranslation(this.appService.getConfig().primaryLangCode)
