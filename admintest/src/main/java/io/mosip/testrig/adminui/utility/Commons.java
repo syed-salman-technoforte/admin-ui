@@ -79,76 +79,70 @@ public class Commons  extends BaseClass{
 	public  static void click(ExtentTest test,WebDriver driver, By by) {
 		logger.info("Clicking " + by );
 		try {
-			
-			Thread.sleep(5000);
+			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
+			Thread.sleep(500);
+			driver.findElement(by).click();
+			Thread.sleep(500);
+		}catch (StaleElementReferenceException sere) {
+			// simply retry finding the element in the refreshed DOM
+			driver.findElement(by).click();
+		}
+		catch (TimeoutException toe) {
+			driver.findElement(by).click();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+		} catch (Exception e) {
+		
+			try {
+				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", driver.findElement(by));
-			
-		}catch(Exception e) {
-			logger.info(e.getMessage());
-			Assert.fail();
-		
-		}
-//		catch (StaleElementReferenceException sere) {
-//			// simply retry finding the element in the refreshed DOM
-//			driver.findElement(by).click();
-//		}
-//		catch (TimeoutException toe) {
-//			driver.findElement(by).click();
-//			try {
-//				Thread.sleep(500);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
-//		} catch (Exception e) {
-//		
-//			try {
-//		//		test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-//				driver.findElement(by).click();
-//			} catch (Exception e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			JavascriptExecutor executor = (JavascriptExecutor) driver;
-//			executor.executeScript("arguments[0].click();", driver.findElement(by));
-//
-//	     
-//	  }
+
+	     
+	  }
 		
 	}
   
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
-				Thread.sleep(5000);
+				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
 				driver.findElement(by).clear();
 				driver.findElement(by).sendKeys(value);
-				
-			}catch(Exception e) {
-				logger.info(e.getMessage());
-				Assert.fail();
+				try {
+					Thread.sleep(8);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}catch (StaleElementReferenceException sere) {
+				// simply retry finding the element in the refreshed DOM
+				driver.findElement(by).sendKeys(value);
 			}
-//			catch (StaleElementReferenceException sere) {
-//				// simply retry finding the element in the refreshed DOM
-//				driver.findElement(by).sendKeys(value);
-//			}
-//			catch (TimeoutException toe) {
-//				driver.findElement(by).sendKeys(value);
-//				logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
-//			} 
-//			catch (Exception e) {
-//				try {
-//					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//				JavascriptExecutor executor = (JavascriptExecutor) driver;
-//				executor.executeScript("arguments[0].click();", driver.findElement(by));
-//
-//			}
+			catch (TimeoutException toe) {
+				driver.findElement(by).sendKeys(value);
+				logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+			} 
+			catch (Exception e) {
+				try {
+					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
+
+			}
 			
 	}
 	
@@ -157,30 +151,30 @@ public class Commons  extends BaseClass{
 		logger.info("Selecting DropDown Index Zero Value " + by );
 		  
 		 try {
-			 Thread.sleep(5000);
+			 Thread.sleep(500);
 			 click(test,driver,by);//REGION
-				
-			 Thread.sleep(5000);
+				Thread.sleep(500);
+			
 		   String att= driver.findElement(by).getAttribute("aria-owns");
 		   String[] list=att.split(" ");
-		   Thread.sleep(5000);
 		    click(test,driver,By.id(list[0]));
-		   
-		 }catch(Exception e) {
-				logger.info(e.getMessage());
-				Assert.fail();
+		    try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		 //		    catch (Exception e) {
-//				try {
-//					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//				JavascriptExecutor executor = (JavascriptExecutor) driver;
-//				executor.executeScript("arguments[0].click();", driver.findElement(by));
-//
-//			}
+		 }catch (Exception e) {
+				try {
+					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				JavascriptExecutor executor = (JavascriptExecutor) driver;
+				executor.executeScript("arguments[0].click();", driver.findElement(by));
+
+			}
 	  }
 	
 	public static void dropdown(ExtentTest test,WebDriver driver, By by,String value)
@@ -366,10 +360,9 @@ public class Commons  extends BaseClass{
 		try {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Edit0")); 
-		Thread.sleep(5000);
+		
 		Assert.assertNotEquals(data,
 				driver.findElement(by).getText());
-		Thread.sleep(5000);
 		driver.findElement(by).clear();
 
 		Commons.enter(test,driver, by, data);
@@ -382,21 +375,18 @@ public class Commons  extends BaseClass{
 			Commons.click(test,driver,  By.xpath("(//*[@id='cancel'])[1]"));
 			Commons.click(test,driver,  By.xpath("(//*[@id='cancel'])[1]"));
 			 logger.info("Click editCenter and Confirm" + by + data);
-		}catch(Exception e) {
-			logger.info(e.getMessage());
-			Assert.fail();
 		}
-//		catch (Exception e) {
-//			try {
-//				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-//			} catch (IOException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//			}
-//			JavascriptExecutor executor = (JavascriptExecutor) driver;
-//			executor.executeScript("arguments[0].click();", driver.findElement(by));
-//
-//		}
+		catch (Exception e) {
+			try {
+				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", driver.findElement(by));
+
+		}
 	}
 	
 	public static void create(ExtentTest test,WebDriver driver) {
@@ -463,7 +453,7 @@ public class Commons  extends BaseClass{
 	    Commons.click(test,driver,By.xpath("//*[@class='mat-calendar-arrow']"));
 	    Thread.sleep(500);
 	    Commons.click(test,driver,By.xpath("//*[text()='"+year+"']"));
-	    Thread.sleep(5000);
+	    Thread.sleep(500);
 	  List<WebElement> cli=  driver.findElements(By.xpath("//*[@class='mat-calendar-body-cell-content']"));
 	  cli.get(month-1).click();
 	  Thread.sleep(500);
