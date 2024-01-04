@@ -80,29 +80,32 @@ public class Commons  extends BaseClass{
 		logger.info("Clicking " + by );
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
-			JavascriptExecutor executor = (JavascriptExecutor) driver;
-			executor.executeScript("arguments[0].click();", driver.findElement(by));
+			Thread.sleep(5000);
+			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
 			// simply retry finding the element in the refreshed DOM
+			logger.error( sere.getMessage());
 			driver.findElement(by).click();
 		}
 		catch (TimeoutException toe) {
+			logger.error( toe.getMessage());
 			driver.findElement(by).click();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
+				logger.error( e.getMessage());
 				e.printStackTrace();
 			}
 			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 		} catch (Exception e) {
-		
+			logger.error( e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
+				logger.error( e1.getMessage());
 				e1.printStackTrace();
 			}
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
