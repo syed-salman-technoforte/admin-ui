@@ -79,7 +79,7 @@ public class Commons  extends BaseClass{
 		logger.info("Clicking " + by );
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
+			Thread.sleep(2000);
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
@@ -115,6 +115,7 @@ public class Commons  extends BaseClass{
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
+				Thread.sleep(2000);
 				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
 				driver.findElement(by).clear();
 				driver.findElement(by).sendKeys(value);
@@ -151,7 +152,7 @@ public class Commons  extends BaseClass{
 		logger.info("Selecting DropDown Index Zero Value " + by );
 		  
 		 try {
-			 Thread.sleep(500);
+			 Thread.sleep(2000);
 			 click(test,driver,by);//REGION
 				Thread.sleep(500);
 			
@@ -182,7 +183,7 @@ public class Commons  extends BaseClass{
 		logger.info("Selecting DropDown By Value " + by +value );
 		  
 		 try {
-			 Thread.sleep(500);
+			 Thread.sleep(2000);
 			 click(test,driver,by);
 				Thread.sleep(500);
 			   String val="'"+value +"'";
@@ -212,7 +213,7 @@ public class Commons  extends BaseClass{
 		logger.info("Selecting DropDown By Value " + by +value );
 		  
 		 try {
-			 Thread.sleep(500);
+			 Thread.sleep(2000);
 			 click(test,driver,by);
 				Thread.sleep(500);
 			   String val="'"+value +"'";
@@ -241,7 +242,7 @@ public class Commons  extends BaseClass{
 	  {
 		logger.info("Selecting DropDown By Value " + by +value );
 		 try {  
-			 Thread.sleep(500);
+			 Thread.sleep(2000);
 			 click(test,driver,by);
 			 Thread.sleep(500);
 		    click(test,driver,value);

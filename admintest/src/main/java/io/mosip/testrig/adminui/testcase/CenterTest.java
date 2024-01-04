@@ -37,8 +37,8 @@ public class CenterTest extends BaseClass{
    String holidayDate=JsonUtil.JsonObjParsing(Commons.getTestData(),"holidayDateCenter");
     Commons.click(test,driver,By.id("admin/resources"));
 
-   // Commons.click(test,driver,By.id("/admin/resources/centers"));
-    Commons.click(test,driver,By.xpath("//a[@href='#/admin/resources/centers']"));
+    Commons.click(test,driver,By.id("/admin/resources/centers"));
+    
     Commons.click(test,driver, By.id("Create Center"));
     test.log(Status.INFO, "Click on Create Center");
     /*

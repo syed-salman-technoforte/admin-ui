@@ -108,7 +108,7 @@ public class BaseClass {
 			options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
 
 		}
-		driver=new ChromeDriver();
+		driver=new ChromeDriver(options);
 
 
 	    js = (JavascriptExecutor) driver;
