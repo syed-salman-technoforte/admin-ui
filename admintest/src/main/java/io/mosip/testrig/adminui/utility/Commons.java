@@ -81,7 +81,8 @@ public class Commons  extends BaseClass{
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
 			Thread.sleep(500);
-			driver.findElement(by).click();
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", driver.findElement(by));
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
 			// simply retry finding the element in the refreshed DOM
