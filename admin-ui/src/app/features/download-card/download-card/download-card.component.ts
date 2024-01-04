@@ -8,6 +8,7 @@ import { DialogComponent } from 'src/app/shared/dialog/dialog.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { saveAs } from 'file-saver';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-download-card',
@@ -123,7 +124,8 @@ export class DownloadCardComponent implements OnInit {
     if(selection === 'true'){
       this.auditService.audit(21, 'ADM-045', {'type':'download-card','actioned':'Verify and Download'});
       this.dataStorageService
-      .downloadCard(this.id).subscribe(data => {
+      .downloadCard(this.id).subscribe(
+        (data) => {
           var fileName = this.id+".pdf";
           const contentDisposition = data.headers.get('Content-Disposition');
           if (contentDisposition) {
@@ -135,13 +137,23 @@ export class DownloadCardComponent implements OnInit {
           }
           saveAs(data.body, fileName);
         },
-        err => {
-          console.error(err);
+        (error: HttpErrorResponse) => {
+          const errorJson = JSON.parse(this.blobToString(error.error));
+          this.showErrorPopup(errorJson.errors[0].message);
         });
     }else{
       this.auditService.audit(21, 'ADM-045', {'type':'download-card','actioned':'Reject'});
       location.reload();
     }         
+  }
+
+  private blobToString(blob): string {
+    const url = URL.createObjectURL(blob);
+    let xmlRequest = new XMLHttpRequest();
+    xmlRequest.open('GET', url, false);
+    xmlRequest.send();
+    URL.revokeObjectURL(url);
+    return xmlRequest.responseText;
   }
 
   viewMore() {
