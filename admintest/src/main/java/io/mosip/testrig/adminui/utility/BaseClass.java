@@ -109,7 +109,8 @@ public class BaseClass {
 		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
 		if(headless.equalsIgnoreCase("yes")) {
 			logger.info("Running is headless mode");
-			options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
+			options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080,--disable-dev-shm-usage");
+			
 
 		}
 		driver=new ChromeDriver(options);
