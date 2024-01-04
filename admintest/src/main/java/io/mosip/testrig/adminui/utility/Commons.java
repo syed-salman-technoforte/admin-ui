@@ -119,34 +119,32 @@ public class Commons  extends BaseClass{
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
-				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
+				Thread.sleep(5000);
 				driver.findElement(by).clear();
 				driver.findElement(by).sendKeys(value);
-				try {
-					Thread.sleep(8);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}catch (StaleElementReferenceException sere) {
-				// simply retry finding the element in the refreshed DOM
-				driver.findElement(by).sendKeys(value);
+				
+			}catch(Exception e) {
+				logger.info(e.getMessage());
 			}
-			catch (TimeoutException toe) {
-				driver.findElement(by).sendKeys(value);
-				logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
-			} 
-			catch (Exception e) {
-				try {
-					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				JavascriptExecutor executor = (JavascriptExecutor) driver;
-				executor.executeScript("arguments[0].click();", driver.findElement(by));
-
-			}
+//			catch (StaleElementReferenceException sere) {
+//				// simply retry finding the element in the refreshed DOM
+//				driver.findElement(by).sendKeys(value);
+//			}
+//			catch (TimeoutException toe) {
+//				driver.findElement(by).sendKeys(value);
+//				logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
+//			} 
+//			catch (Exception e) {
+//				try {
+//					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
+//				} catch (IOException e1) {
+//					// TODO Auto-generated catch block
+//					e1.printStackTrace();
+//				}
+//				JavascriptExecutor executor = (JavascriptExecutor) driver;
+//				executor.executeScript("arguments[0].click();", driver.findElement(by));
+//
+//			}
 			
 	}
 	
