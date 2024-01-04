@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -19,7 +20,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
 public class Commons  extends BaseClass{
-	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(Commons.class);
+	private static final Logger logger = Logger.getLogger(Commons.class);
 
 	public static String appendDate=getPreAppend()+getDateTime();
 	
@@ -79,12 +80,14 @@ public class Commons  extends BaseClass{
 		logger.info("Clicking " + by );
 		try {
 			
-			Thread.sleep(1000);
-			driver.findElement(by).click();
-			logger.info("Click on "+by);
+			Thread.sleep(5000);
+			JavascriptExecutor executor = (JavascriptExecutor) driver;
+			executor.executeScript("arguments[0].click();", driver.findElement(by));
 			
 		}catch(Exception e) {
 			logger.info(e.getMessage());
+			Assert.fail();
+		
 		}
 //		catch (StaleElementReferenceException sere) {
 //			// simply retry finding the element in the refreshed DOM
@@ -119,12 +122,13 @@ public class Commons  extends BaseClass{
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(5000);
 				driver.findElement(by).clear();
 				driver.findElement(by).sendKeys(value);
 				
 			}catch(Exception e) {
 				logger.info(e.getMessage());
+				Assert.fail();
 			}
 //			catch (StaleElementReferenceException sere) {
 //				// simply retry finding the element in the refreshed DOM
@@ -153,17 +157,18 @@ public class Commons  extends BaseClass{
 		logger.info("Selecting DropDown Index Zero Value " + by );
 		  
 		 try {
-			 Thread.sleep(1000);
+			 Thread.sleep(5000);
 			 click(test,driver,by);//REGION
 				
-			 Thread.sleep(1000);
+			 Thread.sleep(5000);
 		   String att= driver.findElement(by).getAttribute("aria-owns");
 		   String[] list=att.split(" ");
-		   Thread.sleep(1000);
+		   Thread.sleep(5000);
 		    click(test,driver,By.id(list[0]));
 		   
 		 }catch(Exception e) {
 				logger.info(e.getMessage());
+				Assert.fail();
 			}
 		 //		    catch (Exception e) {
 //				try {
@@ -361,10 +366,10 @@ public class Commons  extends BaseClass{
 		try {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Edit0")); 
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		Assert.assertNotEquals(data,
 				driver.findElement(by).getText());
-		Thread.sleep(1000);
+		Thread.sleep(5000);
 		driver.findElement(by).clear();
 
 		Commons.enter(test,driver, by, data);
@@ -379,6 +384,7 @@ public class Commons  extends BaseClass{
 			 logger.info("Click editCenter and Confirm" + by + data);
 		}catch(Exception e) {
 			logger.info(e.getMessage());
+			Assert.fail();
 		}
 //		catch (Exception e) {
 //			try {
@@ -457,7 +463,7 @@ public class Commons  extends BaseClass{
 	    Commons.click(test,driver,By.xpath("//*[@class='mat-calendar-arrow']"));
 	    Thread.sleep(500);
 	    Commons.click(test,driver,By.xpath("//*[text()='"+year+"']"));
-	    Thread.sleep(1000);
+	    Thread.sleep(5000);
 	  List<WebElement> cli=  driver.findElements(By.xpath("//*[@class='mat-calendar-body-cell-content']"));
 	  cli.get(month-1).click();
 	  Thread.sleep(500);
