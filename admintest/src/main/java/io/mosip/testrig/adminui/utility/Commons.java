@@ -79,7 +79,7 @@ public class Commons  extends BaseClass{
 		logger.info("Clicking " + by );
 		try {
 			
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			driver.findElement(by).click();
 			logger.info("Click on "+by);
 			
@@ -119,7 +119,7 @@ public class Commons  extends BaseClass{
 	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
 		logger.info("Entering " + by +value);
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(1000);
 				driver.findElement(by).clear();
 				driver.findElement(by).sendKeys(value);
 				
@@ -153,13 +153,13 @@ public class Commons  extends BaseClass{
 		logger.info("Selecting DropDown Index Zero Value " + by );
 		  
 		 try {
-			 Thread.sleep(5000);
+			 Thread.sleep(1000);
 			 click(test,driver,by);//REGION
 				
-			 Thread.sleep(5000);
+			 Thread.sleep(1000);
 		   String att= driver.findElement(by).getAttribute("aria-owns");
 		   String[] list=att.split(" ");
-		   Thread.sleep(5000);
+		   Thread.sleep(1000);
 		    click(test,driver,By.id(list[0]));
 		   
 		 }catch(Exception e) {
@@ -361,10 +361,10 @@ public class Commons  extends BaseClass{
 		try {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Edit0")); 
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		Assert.assertNotEquals(data,
 				driver.findElement(by).getText());
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		driver.findElement(by).clear();
 
 		Commons.enter(test,driver, by, data);
@@ -457,7 +457,7 @@ public class Commons  extends BaseClass{
 	    Commons.click(test,driver,By.xpath("//*[@class='mat-calendar-arrow']"));
 	    Thread.sleep(500);
 	    Commons.click(test,driver,By.xpath("//*[text()='"+year+"']"));
-	    Thread.sleep(5000);
+	    Thread.sleep(1000);
 	  List<WebElement> cli=  driver.findElements(By.xpath("//*[@class='mat-calendar-body-cell-content']"));
 	  cli.get(month-1).click();
 	  Thread.sleep(500);
