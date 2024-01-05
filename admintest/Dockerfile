@@ -36,10 +36,9 @@ COPY --chown=${container_user}:${container_user} ./src/main/resources/ ${work_di
 COPY --chown=${container_user_uid}:${container_user} ./target/*.jar ${work_dir}
 
 # Set working directory
-WORKDIR ${work_dir}
+WORKDIR /home/${container_user}/
 
-# Expose port 4444 (this is where Selenium Grid will be accessible)
-EXPOSE 4444
+
 
 # Entrypoint for the container
 ENTRYPOINT ["/bin/bash", "-c", "./entrypoint.sh"]
