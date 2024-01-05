@@ -24,8 +24,8 @@ ARG container_user_gid=1001
 ENV work_dir=/home/${container_user}/
 
 # Install packages and create user
-RUN chown -R ${container_user}:${container_user} /home/${container_user}/  \
-    groupadd -g ${container_user_gid} ${container_user_group} \
+RUN chown -R ${container_user}:${container_user} /home/${container_user}/ \
+    && groupadd -g ${container_user_gid} ${container_user_group} \
     && useradd -u ${container_user_uid} -g ${container_user_group} -s /bin/bash -m ${container_user} -d ${work_dir}
 
 # Switch to the specified user for the subsequent commands
