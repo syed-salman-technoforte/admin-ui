@@ -43,6 +43,7 @@ public class Commons  extends BaseClass{
 		Commons.click(test,driver, By.id("applyTxt"));
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -65,6 +66,7 @@ public class Commons  extends BaseClass{
 		Commons.click(test,driver, By.id("applyTxt")); 
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -209,6 +211,7 @@ public class Commons  extends BaseClass{
 				e.printStackTrace();
 			}
 		 }catch (Exception e) {
+			 logger.info(e.getMessage());
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
@@ -239,6 +242,7 @@ public class Commons  extends BaseClass{
 				e.printStackTrace();
 			}
 		 }catch (Exception e) {
+			 logger.info(e.getMessage());
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
@@ -263,7 +267,9 @@ public class Commons  extends BaseClass{
 				Thread.sleep(500);
 			
 		 }catch (Exception e) {
+			 logger.info(e.getMessage());
 				try {
+					
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -328,6 +334,7 @@ public class Commons  extends BaseClass{
 		 logger.info("Click Edit and Confirm" + by + data);
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -359,6 +366,7 @@ public class Commons  extends BaseClass{
 
 			 logger.info("Click Edit and Confirm" + by + data);
 			 }catch (Exception e) {
+				 logger.info(e.getMessage());
 					try {
 						test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 					} catch (IOException e1) {
@@ -391,6 +399,7 @@ public class Commons  extends BaseClass{
 			 logger.info("Click editCenter and Confirm" + by + data);
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -475,6 +484,7 @@ public class Commons  extends BaseClass{
 	    }catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.info(e.getMessage());
 		}
 	}
 	
