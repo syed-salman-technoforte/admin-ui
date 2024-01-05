@@ -224,6 +224,7 @@ public class DBManager extends BaseClass {
 							statement
 									.addBatch("delete from zone_user_h  where cr_by ='"+BaseClass.userid+"'");
 							statement.addBatch("delete from blocklisted_words where cr_by ='"+BaseClass.userid+"'");
+							statement.addBatch("delete from bulkupload_transaction where cr_by ='"+BaseClass.userid+"'");
 							
 							
 							
