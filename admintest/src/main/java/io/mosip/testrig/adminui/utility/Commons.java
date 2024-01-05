@@ -80,7 +80,7 @@ public class Commons  extends BaseClass{
 		logger.info("Clicking " + by );
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
