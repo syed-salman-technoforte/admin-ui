@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -64,52 +67,62 @@ public class BaseClass {
 	protected String password = allpassword[0];
 	protected  String data = Commons.appendDate;
 	public static ExtentSparkReporter html;
-	
-	
-	
-    public static    ExtentReports extent;
-    public static    ExtentTest test;
-    
+
+
+
+	public static    ExtentReports extent;
+	public static    ExtentTest test;
+
 
 	public void setLangcode(String langcode) throws Exception {
 		this.langcode = Commons.getFieldData("langcode");
 	}
-	
-	@BeforeSuite
-	
-	
 
-  @BeforeMethod
-    public void set() {
-        extent=ExtentReportManager.getReports();
-  }
-  
+	@BeforeSuite
+
+
+
+	@BeforeMethod
+	public void set() {
+		extent=ExtentReportManager.getReports();
+	}
+
 	@BeforeMethod
 	public void setUp() throws Exception {
-		 Reporter.log("BaseClass",true);
-		   test=extent.createTest(getCommitId(),getCommitId());
-		  
-		ChromeOptions options = new ChromeOptions();
-		
-		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
-		
-	
-		if(headless.equalsIgnoreCase("yes")) {
-			options.addArguments("--headless=new");
+		Reporter.log("BaseClass", true);
+		test = extent.createTest(getCommitId(), getCommitId());
+		logger.info("Start set up");
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+			
+			if(JsonUtil.JsonObjParsing(Commons.getTestData(),"Docker").equals("yes")) {
+				logger.info("Docker start");
+				String configFilePath ="/usr/bin/chromedriver";
+				System.setProperty("webdriver.chrome.driver", configFilePath);
+			}else {
+				WebDriverManager.chromedriver().setup();
+			}
+		}else {
+			WebDriverManager.chromedriver().setup();
+			logger.info("window chrome driver start");
 		}
-	
-	WebDriverManager.chromedriver().setup();
-	driver=new ChromeDriver(options);
-		 
-		
-//		
+		ChromeOptions options = new ChromeOptions();
+		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		if(headless.equalsIgnoreCase("yes")) {
+			logger.info("Running is headless mode");
+			options.addArguments("--headless", "--disable-gpu","--no-sandbox", "--window-size=1920x1080","--disable-dev-shm-usage");
+			
+
+		}
+		driver=new ChromeDriver(options);
+
+
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get(envPath);
 		driver.manage().window().maximize();
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-		
+
 		String language1 = null;
 		try {
 			language1 = Commons.getFieldData("langcode");
@@ -126,35 +139,83 @@ public class BaseClass {
 		}
 		driver.findElement(By.id("username")).sendKeys(userid);
 		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.xpath("//input[@name=\'login\']")).click();
-
+		driver.findElement(By.xpath("//input[@name='login']")).click();
 	}
+	//	  @BeforeMethod
+	//	    public void setUp() throws Exception {
+	//	        Reporter.log("BaseClass", true);
+	//	        test = extent.createTest(getCommitId(), getCommitId());
+	//
+	//	        ChromeOptions options = new ChromeOptions();
+	//	        String headless = JsonUtil.JsonObjParsing(Commons.getTestData(), "headless");
+	//	        if (headless.equalsIgnoreCase("yes")) {
+	//	            options.addArguments("--no-sandbox");
+	//	            options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
+	//	        }
+	//
+	//	        WebDriver driver;
+	//
+	//	        if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
+	//	            // Use remote WebDriver for Linux
+	//	            options.addArguments("--no-sandbox"); // Add additional arguments if needed
+	//	            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
+	//	        } else {
+	//	            // Use local WebDriver for non-Linux
+	//	            WebDriverManager.chromedriver().setup();
+	//	            driver = new ChromeDriver(options);
+	//	        }
+	//
+	//	        js = (JavascriptExecutor) driver;
+	//	        vars = new HashMap<String, Object>();
+	//	        driver.get(envPath);
+	//	        driver.manage().window().maximize();
+	//	        Thread.sleep(500);
+	//	        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+	//
+	//	        String language1 = null;
+	//	        try {
+	//	            language1 = Commons.getFieldData("langcode");
+	//	            logger.info(language1);
+	//	            if (!language1.equals("sin")) {
+	//	                Commons.click(test, driver, By.xpath("//*[@id='kc-locale-dropdown']"));
+	//	                String var = "//li/a[contains(text(),'" + language1 + "')]";
+	//	                Commons.click(test, driver, By.xpath(var));
+	//	            }
+	//	        } catch (Exception e) {
+	//	            e.getMessage();
+	//	        }
+	//
+	//	        driver.findElement(By.id("username")).sendKeys(userid);
+	//	        driver.findElement(By.id("password")).sendKeys(password);
+	//	        driver.findElement(By.xpath("//input[@name='login']")).click();
+	//	    }
+
 
 	@AfterMethod
 	public void tearDown() {
-		
+
 		driver.quit();
 		extent.flush();
-		
+
 	}
-	
+
 	@AfterSuite
 	public void pushFileToS3() {
 		getCommitId();
 		if (ConfigManager.getPushReportsToS3().equalsIgnoreCase("yes")) {
 			// EXTENT REPORT
-			
+
 			File repotFile = new File(ExtentReportManager.Filepath);
 			System.out.println("reportFile is::" + repotFile);
-			 String reportname = repotFile.getName();
-			
-			
+			String reportname = repotFile.getName();
+
+
 			S3Adapter s3Adapter = new S3Adapter();
 			boolean isStoreSuccess = false;
 			try {
 				isStoreSuccess = s3Adapter.putObject(ConfigManager.getS3Account(), BaseTestCaseFunc.testLevel, null,
 						"AdminUi",env+BaseTestCaseFunc.currentModule+data+".html", repotFile);
-				
+
 				System.out.println("isStoreSuccess:: " + isStoreSuccess);
 			} catch (Exception e) {
 				System.out.println("error occured while pushing the object" + e.getLocalizedMessage());
@@ -166,10 +227,10 @@ public class BaseClass {
 				System.out.println("Failed while pushing file to S3");
 			}
 		}
-		
-		}
-	
-	
+
+	}
+
+
 
 	@DataProvider(name = "data-provider")
 	public Object[] dpMethod() {
@@ -188,8 +249,8 @@ public class BaseClass {
 		String contents[] = null;
 		try {
 			String langcode = JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
-				
-			File directoryPath = new File(System.getProperty("user.dir") + "\\BulkUploadFiles\\" + langcode + "\\");
+
+			File directoryPath = new File(TestRunner.getResourcePath()+ "//BulkUploadFiles//" + langcode + "//");
 
 			if (directoryPath.exists()) {
 
@@ -204,20 +265,20 @@ public class BaseClass {
 		}
 		return contents;
 	}
-	 private String getCommitId(){
-	    	Properties properties = new Properties();
-			try (InputStream is = ExtentReportManager.class.getClassLoader().getResourceAsStream("git.properties")) {
-				properties.load(is);
-				
-				return "Commit Id is: " + properties.getProperty("git.commit.id.abbrev") + " & Branch Name is:" + properties.getProperty("git.branch");
+	private String getCommitId(){
+		Properties properties = new Properties();
+		try (InputStream is = ExtentReportManager.class.getClassLoader().getResourceAsStream("git.properties")) {
+			properties.load(is);
 
-			} catch (IOException e) {
-				logger.error(e.getStackTrace());
-				return "";
-			}
-			
-	    }
-	
-	 
-	 
+			return "Commit Id is: " + properties.getProperty("git.commit.id.abbrev") + " & Branch Name is:" + properties.getProperty("git.branch");
+
+		} catch (IOException e) {
+			logger.error(e.getStackTrace());
+			return "";
+		}
+
+	}
+
+
+
 }

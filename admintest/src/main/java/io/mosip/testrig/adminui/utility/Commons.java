@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -19,7 +20,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
 public class Commons  extends BaseClass{
-	private static final org.slf4j.Logger logger= org.slf4j.LoggerFactory.getLogger(Commons.class);
+	private static final Logger logger = Logger.getLogger(Commons.class);
 
 	public static String appendDate=getPreAppend()+getDateTime();
 	
@@ -42,6 +43,7 @@ public class Commons  extends BaseClass{
 		Commons.click(test,driver, By.id("applyTxt"));
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -64,6 +66,7 @@ public class Commons  extends BaseClass{
 		Commons.click(test,driver, By.id("applyTxt")); 
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -79,28 +82,32 @@ public class Commons  extends BaseClass{
 		logger.info("Clicking " + by );
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
-			Thread.sleep(500);
+			Thread.sleep(1000);
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
 			// simply retry finding the element in the refreshed DOM
+			logger.error( sere.getMessage());
 			driver.findElement(by).click();
 		}
 		catch (TimeoutException toe) {
+			logger.error( toe.getMessage());
 			driver.findElement(by).click();
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
+				logger.error( e.getMessage());
 				e.printStackTrace();
 			}
 			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 		} catch (Exception e) {
-		
+			logger.error( e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
+				logger.error( e1.getMessage());
 				e1.printStackTrace();
 			}
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -108,6 +115,16 @@ public class Commons  extends BaseClass{
 
 	     
 	  }
+		
+//		try {
+//			Thread.sleep(5000);
+//			JavascriptExecutor executor = (JavascriptExecutor) driver;
+//			executor.executeScript("arguments[0].click();", driver.findElement(by));
+//			
+//		}catch(Exception e) {
+//			logger.error( e.getMessage());
+//			Assert.fail();
+//		}
 		
 	}
   
@@ -194,6 +211,7 @@ public class Commons  extends BaseClass{
 				e.printStackTrace();
 			}
 		 }catch (Exception e) {
+			 logger.info(e.getMessage());
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
@@ -224,6 +242,7 @@ public class Commons  extends BaseClass{
 				e.printStackTrace();
 			}
 		 }catch (Exception e) {
+			 logger.info(e.getMessage());
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
@@ -248,7 +267,9 @@ public class Commons  extends BaseClass{
 				Thread.sleep(500);
 			
 		 }catch (Exception e) {
+			 logger.info(e.getMessage());
 				try {
+					
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -313,6 +334,7 @@ public class Commons  extends BaseClass{
 		 logger.info("Click Edit and Confirm" + by + data);
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -344,6 +366,7 @@ public class Commons  extends BaseClass{
 
 			 logger.info("Click Edit and Confirm" + by + data);
 			 }catch (Exception e) {
+				 logger.info(e.getMessage());
 					try {
 						test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 					} catch (IOException e1) {
@@ -376,6 +399,7 @@ public class Commons  extends BaseClass{
 			 logger.info("Click editCenter and Confirm" + by + data);
 		}
 		catch (Exception e) {
+			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 			} catch (IOException e1) {
@@ -460,6 +484,7 @@ public class Commons  extends BaseClass{
 	    }catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.info(e.getMessage());
 		}
 	}
 	
