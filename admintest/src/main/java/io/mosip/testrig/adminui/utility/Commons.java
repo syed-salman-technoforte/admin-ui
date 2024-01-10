@@ -19,6 +19,8 @@ import org.testng.Assert;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
+
 public class Commons  extends BaseClass{
 	private static final Logger logger = Logger.getLogger(Commons.class);
 
@@ -284,19 +286,9 @@ public class Commons  extends BaseClass{
 	{
 		return JsonUtil.readJsonFileText("TestData.json");
 	}
-	public static String getFieldData(String idfield) throws Exception
-	{
-		return	JsonUtil.JsonObjSimpleParsing(getTestData(), idfield);
 	
-	}
 
-	public static void clickSpan(ExtentTest test,WebDriver driver,String key) throws Exception {
-		
-		String val=Commons.getFieldData(key);
-		String var="//span[contains(text(),'"+ val+ "')]";
-		  Commons.click(test,driver,By.xpath(var)); 
-		  logger.info("clickSpan" + var );
-	}
+	
 
 	public static void deactivate(ExtentTest test,WebDriver driver) {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
@@ -444,7 +436,7 @@ public class Commons  extends BaseClass{
 	  {
 	String preappend = null;
 	try {
-		preappend = JsonUtil.JsonObjParsing(getTestData(),"preappend");
+		preappend =ConfigManager.getpreappend();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

@@ -25,6 +25,7 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.Status;
 import com.paulhammant.ngwebdriver.NgWebDriver;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 import io.mosip.testrig.adminui.utility.JsonUtil;
@@ -33,7 +34,7 @@ public class DeviceTest extends BaseClass{
   public void deviceCRUD() throws InterruptedException {
 	   String validityDate;
 	try {
-		validityDate = JsonUtil.JsonObjParsing(Commons.getTestData(),"validityDate");
+		validityDate = ConfigManager.getvalidityDate();
 		 test=extent.createTest("DeviceTest", "verify Login");
 	   Commons.click(test,driver,By.id("admin/resources"));
 	   Commons.click(test,driver,By.id("/admin/resources/devices"));

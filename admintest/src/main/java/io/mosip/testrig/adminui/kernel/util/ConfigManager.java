@@ -96,6 +96,37 @@ public class ConfigManager {
 	private static String IAM_REALM_ID = "keycloak-realm-id";
 	private static String IAM_USERS_TO_CREATE = "iam-users-to-create";
 	private static String IAM_USERS_PASSWORD = "iam-users-password";
+	
+	private static String HolidayDateCenter = "holidayDateCenter";
+	private static String HolidayDate = "holidayDate";
+	private static String Preappend = "preappend";
+	private static String Splitdigit = "splitdigit";
+	private static String JsonObjName = "jsonObjName";
+	private static String Bulkwait = "bulkwait";
+	private static String ValidityDate = "validityDate";
+	private static String PublicKey = "publicKey";
+	private static String SignPublicKey = "signPublicKey";
+	private static String Headless = "headless";
+	private static String Docker = "docker";
+	private static String Langcode = "langcode";
+	private static String DummyData = "dummyData";//loginlang
+	private static String Loginlang = "loginlang";
+	
+	
+	private static String loginlang;
+	private static String langcode;
+	private static String docker;
+	private static String headless;
+	private static String signPublicKey;
+	private static String publicKey;
+	private static String validityDate;
+	private static String bulkwait;
+	private static String dummyData;
+	private static String jsonObjName;
+	private static String splitdigit;
+	private static String preappend;
+	private static String holidayDate;
+	private static String holidayDateCenter;
 //
 //	private static String AUTH_DEMO_SERVICE_PORT = "authDemoServicePort";
 //	private static String AUTH_DEMO_SERVICE_BASE_URL = "authDemoServiceBaseURL";
@@ -278,11 +309,94 @@ public class ConfigManager {
 		
 		push_reports_to_s3 =System.getenv(PUSH_TO_S3) == null ? propsKernel.getProperty(PUSH_TO_S3) : System.getenv(PUSH_TO_S3);
 		propsKernel.setProperty(PUSH_TO_S3, push_reports_to_s3);
+		holidayDateCenter =System.getenv(HolidayDateCenter) == null ? propsKernel.getProperty(HolidayDateCenter) : System.getenv(HolidayDateCenter);
+		propsKernel.setProperty(HolidayDateCenter, holidayDateCenter);
+		
+		holidayDate =System.getenv(HolidayDate) == null ? propsKernel.getProperty(HolidayDate) : System.getenv(HolidayDate);
+		propsKernel.setProperty(HolidayDate, holidayDate);
+		
+		preappend =System.getenv(Preappend) == null ? propsKernel.getProperty(Preappend) : System.getenv(Preappend);
+		propsKernel.setProperty(Preappend, preappend);
+		
+		splitdigit =System.getenv(Splitdigit) == null ? propsKernel.getProperty(Splitdigit) : System.getenv(Splitdigit);
+		propsKernel.setProperty(Splitdigit, splitdigit);
+		
+		jsonObjName =System.getenv(JsonObjName) == null ? propsKernel.getProperty(JsonObjName) : System.getenv(JsonObjName);
+		propsKernel.setProperty(JsonObjName, jsonObjName);
+		
+		bulkwait =System.getenv(Bulkwait) == null ? propsKernel.getProperty(Bulkwait) : System.getenv(Bulkwait);
+		propsKernel.setProperty(Bulkwait, bulkwait);
+		
+		
+		
+		dummyData =System.getenv(DummyData) == null ? propsKernel.getProperty(DummyData) : System.getenv(DummyData);
+		propsKernel.setProperty(DummyData, dummyData);
+		
+		validityDate =System.getenv(ValidityDate) == null ? propsKernel.getProperty(ValidityDate) : System.getenv(ValidityDate);
+		propsKernel.setProperty(ValidityDate, validityDate);
+		
+		publicKey =System.getenv(PublicKey) == null ? propsKernel.getProperty(PublicKey) : System.getenv(PublicKey);
+		propsKernel.setProperty(PublicKey, publicKey);
+		
+		signPublicKey =System.getenv(SignPublicKey) == null ? propsKernel.getProperty(SignPublicKey) : System.getenv(SignPublicKey);
+		propsKernel.setProperty(SignPublicKey, signPublicKey);
+		
+		headless =System.getenv(Headless) == null ? propsKernel.getProperty(Headless) : System.getenv(Headless);
+		propsKernel.setProperty(Headless, headless);
+		
+		docker =System.getenv(Docker) == null ? propsKernel.getProperty(Docker) : System.getenv(Docker);
+		propsKernel.setProperty(Docker, docker);
+		
+		langcode =System.getenv(Langcode) == null ? propsKernel.getProperty(Langcode) : System.getenv(Langcode);
+		propsKernel.setProperty(Langcode, langcode);
+		
+		loginlang =System.getenv(Loginlang) == null ? propsKernel.getProperty(Loginlang) : System.getenv(Loginlang);
+		propsKernel.setProperty(Loginlang, loginlang);
 
-		admin_userName =System.getenv(ADMIN_USERNAME) == null ? propsKernel.getProperty(ADMIN_USERNAME) : System.getenv(ADMIN_USERNAME);
-		propsKernel.setProperty(ADMIN_USERNAME, admin_userName);
 	}
-
+	public static String getloginlang() {
+		return loginlang;
+	}
+	public static String getlangcode() {
+		return langcode;
+	}
+	public static String getdocker() {
+		return docker;
+	}
+	public static String getheadless() {
+		return headless;
+	}
+	public static String getsignPublicKey() {
+		return signPublicKey;
+	}
+	public static String getpublicKey() {
+		return publicKey;
+	}
+	public static String getvalidityDate() {
+		return validityDate;
+	}
+	public static String getdummyData() {
+		return dummyData;
+	}
+	
+	public static String getbulkwait() {
+		return bulkwait;
+	}
+	public static String getjsonObjName() {
+		return jsonObjName;
+	}
+	public static String getsplitdigit() {
+		return splitdigit;
+	}
+	public static String getpreappend() {
+		return preappend;
+	}
+	public static String getholidayDate() {
+		return holidayDate;
+	}
+	public static String getholidayDateCenter() {
+		return holidayDateCenter;
+	}
 	public static String getAdminUserName() {
 		return admin_userName;
 	}

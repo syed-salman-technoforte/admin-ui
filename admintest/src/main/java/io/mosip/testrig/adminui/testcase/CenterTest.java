@@ -23,6 +23,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 import io.mosip.testrig.adminui.utility.JsonUtil;
@@ -34,7 +35,7 @@ public class CenterTest extends BaseClass{
 	  
    Reporter.log("centerCRUD",true);
    test=extent.createTest("CenterTest", "verify Login");
-   String holidayDate=JsonUtil.JsonObjParsing(Commons.getTestData(),"holidayDateCenter");
+   String holidayDate=ConfigManager.getholidayDateCenter();
     Commons.click(test,driver,By.id("admin/resources"));
 
     Commons.click(test,driver,By.id("/admin/resources/centers"));

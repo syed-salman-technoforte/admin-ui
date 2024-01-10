@@ -26,6 +26,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 import io.mosip.testrig.adminui.utility.JsonUtil;
@@ -36,7 +37,7 @@ public class BlockListTest extends BaseClass {
 	public void blocklistedwordsCRUD() {
 
 		try {
-			String blocklistedWord=JsonUtil.JsonObjParsing(Commons.getTestData(),"dummyData");
+			String blocklistedWord=ConfigManager.getdummyData();
 		
 			test=extent.createTest("BlockListTest", "verify Login");
 		String idBlocklisted="admin/masterdata/blocklisted-words/view";

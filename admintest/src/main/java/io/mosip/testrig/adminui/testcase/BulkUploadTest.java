@@ -29,6 +29,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 import io.mosip.testrig.adminui.utility.JsonUtil;
@@ -91,7 +92,7 @@ public class BulkUploadTest extends BaseClass {
    // Commons.click(test,driver,By.id("fileInput"));
     
 
-    String filePath = TestRunner.getResourcePath()+ "//BulkUploadFiles//"+ JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang")+"//"+table+".csv";
+    String filePath = TestRunner.getResourcePath()+ "//BulkUploadFiles//"+ ConfigManager.getloginlang()+"//"+table+".csv";
    Commons.enter(test, driver, By.id("fileInput"), filePath);
    
  
@@ -105,7 +106,7 @@ public class BulkUploadTest extends BaseClass {
     logger.info(divTextArr[1].trim());
     
     Commons.click(test,driver,By.id("confirmmessagepopup")); //DONE
-    Thread.sleep(Long.parseLong(JsonUtil.JsonObjParsing(Commons.getTestData(),"bulkwait")));
+    Thread.sleep(Long.parseLong(ConfigManager.getbulkwait()));
 
     String transId=driver.findElement(By.xpath("//table[@class='mat-table']//tr[2]//td[1]")).getText();
     String status=driver.findElement(By.xpath("//table[@class='mat-table']//tr[2]//td[5]")).getText();

@@ -24,8 +24,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
+import io.mosip.testrig.adminui.utility.JsonUtil;
 import io.mosip.testrig.adminui.utility.TestRunner;
 
 public class LoginTest extends BaseClass{
@@ -44,7 +46,7 @@ public class LoginTest extends BaseClass{
     driver.findElement(By.linkText("Admin")).click();
     
     try {
-		 language=Commons.getFieldData("langcode");
+		 language=JsonUtil.JsonObjArrayListParsing2(ConfigManager.getlangcode());
 	
     logger.info(language);
     } catch (Exception e) {

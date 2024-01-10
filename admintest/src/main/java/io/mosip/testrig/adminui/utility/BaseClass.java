@@ -74,9 +74,7 @@ public class BaseClass {
 	public static    ExtentTest test;
 
 
-	public void setLangcode(String langcode) throws Exception {
-		this.langcode = Commons.getFieldData("langcode");
-	}
+	
 
 	@BeforeSuite
 
@@ -94,7 +92,7 @@ public class BaseClass {
 		logger.info("Start set up");
 		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
 			
-			if(JsonUtil.JsonObjParsing(Commons.getTestData(),"Docker").equals("yes")) {
+			if(ConfigManager.getdocker().equals("yes")) {
 				logger.info("Docker start");
 				String configFilePath ="/usr/bin/chromedriver";
 				System.setProperty("webdriver.chrome.driver", configFilePath);
@@ -106,7 +104,7 @@ public class BaseClass {
 			logger.info("window chrome driver start");
 		}
 		ChromeOptions options = new ChromeOptions();
-		String headless=JsonUtil.JsonObjParsing(Commons.getTestData(),"headless");
+		String headless=ConfigManager.getheadless();
 		if(headless.equalsIgnoreCase("yes")) {
 			logger.info("Running is headless mode");
 			options.addArguments("--headless", "--disable-gpu","--no-sandbox", "--window-size=1920x1080","--disable-dev-shm-usage");
@@ -125,12 +123,14 @@ public class BaseClass {
 
 		String language1 = null;
 		try {
-			language1 = Commons.getFieldData("langcode");
-
-			logger.info(language1);
+			
+			language1 = ConfigManager.getloginlang();
+			String loginlang = null;
+			System.out.println(language1);
 			if(!language1.equals("sin"))
+			loginlang = JsonUtil.JsonObjArrayListParsing2(ConfigManager.getlangcode());
 			{Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
-			String var = "//li/a[contains(text(),'" + language1 + "')]";
+			String var = "//li/a[contains(text(),'" + loginlang + "')]";
 			Commons.click(test,driver, By.xpath(var));
 			}
 
@@ -248,7 +248,7 @@ public class BaseClass {
 	public static String[] readFolderJsonList() {
 		String contents[] = null;
 		try {
-			String langcode = JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang");
+			String langcode = ConfigManager.getloginlang();
 
 			File directoryPath = new File(TestRunner.getResourcePath()+ "//BulkUploadFiles//" + langcode + "//");
 
