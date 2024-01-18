@@ -25,6 +25,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.Status;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 import io.mosip.testrig.adminui.utility.JsonUtil;
@@ -32,10 +33,10 @@ public class MachineTest extends BaseClass{
   @Test(groups = "M")
   public void machineCRUD() throws Exception {
 	  test=extent.createTest("MachineTest", "verify Login");
-	  String holidayDateCenter=JsonUtil.JsonObjParsing(Commons.getTestData(),"holidayDateCenter");
-	  String publicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"publicKey");
+	  String holidayDateCenter=ConfigManager.getholidayDateCenter();
+	  String publicKey=ConfigManager.getpublicKey();
 
-	  String signPublicKey=JsonUtil.JsonObjParsing(Commons.getTestData(),"signPublicKey");
+	  String signPublicKey=ConfigManager.getsignPublicKey();
 	  
 	  Commons.click(test,driver,By.id("admin/resources"));
     Commons.click(test,driver,By.xpath("//a[@href='#/admin/resources/machines']"));

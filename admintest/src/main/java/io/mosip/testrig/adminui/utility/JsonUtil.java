@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.mosip.testrig.adminui.kernel.util.ConfigManager;
 
 import org.apache.commons.io.IOUtils;
 import java.io.File;
@@ -56,26 +57,28 @@ public class JsonUtil {
         return payload;
     }
 
-    public static String JsonObjSimpleParsing(String jsonIdentity, String idfield)
-            throws Exception {
-        String val =null;
-        JSONObject json = new JSONObject(jsonIdentity);
+    
 
-        JSONObject identity = json.getJSONObject("identity");
+public static String JsonObjArrayListParsing2(String a) throws Exception {
+		
 
-        JSONArray identityitems = identity.getJSONArray(idfield);
+		JSONArray jsonArray = new JSONArray(a);
 
-        for (int i = 0, size = identityitems.length(); i < size; i++) {
-            JSONObject idItem = identityitems.getJSONObject(i);
-            String lang = idItem.getString("language");
-             val = idItem.getString("value");
-            if (lang.equalsIgnoreCase(JsonUtil.JsonObjParsing(Commons.getTestData(),"loginlang")))
-            	return val;
-        }
-        return "sin";
-    }
 
- 
+
+		for (int i = 0, size = jsonArray.length(); i < size; i++) {
+			JSONObject idItem = jsonArray.getJSONObject(i);
+			String lang = idItem.getString("language");
+			String val = idItem.getString("value");
+			if (lang.equals(ConfigManager.getloginlang())) {
+				return val;
+			}
+
+		}
+		return "";
+
+
+	}
     /**
      * Direct String
      * 
