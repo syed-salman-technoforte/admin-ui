@@ -135,7 +135,7 @@ public class ConfigManager {
 //	private static String MOUNT_PATH_FOR_SCENARIO = "mountPathForScenario";
 //	
 //	private static String PACKET_UTILITY_BASE_URL = "packetUtilityBaseUrl";
-	private static String ADMIN_USERNAME = "admin_userName";
+
 	private static String REPORT_EXPIRATION_IN_DAYS = "reportExpirationInDays";
 //	private static String pms_client_secret;
 //	private static String pms_client_id;

@@ -42,6 +42,7 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -74,7 +75,7 @@ public class BaseClass {
 	public static    ExtentTest test;
 
 
-	
+
 
 	@BeforeSuite
 
@@ -90,15 +91,13 @@ public class BaseClass {
 		Reporter.log("BaseClass", true);
 		test = extent.createTest(getCommitId(), getCommitId());
 		logger.info("Start set up");
-		if(System.getProperty("os.name").equalsIgnoreCase("Linux")) {
-			
-			if(ConfigManager.getdocker().equals("yes")) {
-				logger.info("Docker start");
-				String configFilePath ="/usr/bin/chromedriver";
-				System.setProperty("webdriver.chrome.driver", configFilePath);
-			}else {
-				WebDriverManager.chromedriver().setup();
-			}
+		if(System.getProperty("os.name").equalsIgnoreCase("Linux") && ConfigManager.getdocker().equals("yes") ) {
+
+
+			logger.info("Docker start");
+			String configFilePath ="/usr/bin/chromedriver";
+			System.setProperty("webdriver.chrome.driver", configFilePath);
+
 		}else {
 			WebDriverManager.chromedriver().setup();
 			logger.info("window chrome driver start");
@@ -108,7 +107,7 @@ public class BaseClass {
 		if(headless.equalsIgnoreCase("yes")) {
 			logger.info("Running is headless mode");
 			options.addArguments("--headless", "--disable-gpu","--no-sandbox", "--window-size=1920x1080","--disable-dev-shm-usage");
-			
+
 
 		}
 		driver=new ChromeDriver(options);
@@ -117,78 +116,34 @@ public class BaseClass {
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get(envPath);
+		logger.info("launch url --"+envPath);
 		driver.manage().window().maximize();
 		Thread.sleep(500);
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
 		String language1 = null;
 		try {
-			
+
 			language1 = ConfigManager.getloginlang();
 			String loginlang = null;
 			System.out.println(language1);
-			if(!language1.equals("sin"))
-			loginlang = JsonUtil.JsonObjArrayListParsing2(ConfigManager.getlangcode());
-			{Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
-			String var = "//li/a[contains(text(),'" + loginlang + "')]";
-			Commons.click(test,driver, By.xpath(var));
+			if(!language1.equals("sin")) {
+				loginlang = JsonUtil.JsonObjArrayListParsing2(ConfigManager.getlangcode());
+				Commons.click(test,driver, By.xpath("//*[@id='kc-locale-dropdown']"));
+				String var = "//li/a[contains(text(),'" + loginlang + "')]";
+				Commons.click(test,driver, By.xpath(var));
 			}
 
 		} catch (Exception e) {
 			e.getMessage();
 		}
-		driver.findElement(By.id("username")).sendKeys(userid);
-		driver.findElement(By.id("password")).sendKeys(password);
-		driver.findElement(By.xpath("//input[@name='login']")).click();
+
+		Commons.enter(test,driver, By.id("username"), userid); 
+		Commons.enter(test,driver, By.id("password"), password);
+		Commons.click(test,driver, By.xpath("//input[@name='login']")); 
+
+
 	}
-	//	  @BeforeMethod
-	//	    public void setUp() throws Exception {
-	//	        Reporter.log("BaseClass", true);
-	//	        test = extent.createTest(getCommitId(), getCommitId());
-	//
-	//	        ChromeOptions options = new ChromeOptions();
-	//	        String headless = JsonUtil.JsonObjParsing(Commons.getTestData(), "headless");
-	//	        if (headless.equalsIgnoreCase("yes")) {
-	//	            options.addArguments("--no-sandbox");
-	//	            options.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
-	//	        }
-	//
-	//	        WebDriver driver;
-	//
-	//	        if (System.getProperty("os.name").equalsIgnoreCase("Linux")) {
-	//	            // Use remote WebDriver for Linux
-	//	            options.addArguments("--no-sandbox"); // Add additional arguments if needed
-	//	            driver = new RemoteWebDriver(new URL("http://selenium-hub:4444/wd/hub"), options);
-	//	        } else {
-	//	            // Use local WebDriver for non-Linux
-	//	            WebDriverManager.chromedriver().setup();
-	//	            driver = new ChromeDriver(options);
-	//	        }
-	//
-	//	        js = (JavascriptExecutor) driver;
-	//	        vars = new HashMap<String, Object>();
-	//	        driver.get(envPath);
-	//	        driver.manage().window().maximize();
-	//	        Thread.sleep(500);
-	//	        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	//
-	//	        String language1 = null;
-	//	        try {
-	//	            language1 = Commons.getFieldData("langcode");
-	//	            logger.info(language1);
-	//	            if (!language1.equals("sin")) {
-	//	                Commons.click(test, driver, By.xpath("//*[@id='kc-locale-dropdown']"));
-	//	                String var = "//li/a[contains(text(),'" + language1 + "')]";
-	//	                Commons.click(test, driver, By.xpath(var));
-	//	            }
-	//	        } catch (Exception e) {
-	//	            e.getMessage();
-	//	        }
-	//
-	//	        driver.findElement(By.id("username")).sendKeys(userid);
-	//	        driver.findElement(By.id("password")).sendKeys(password);
-	//	        driver.findElement(By.xpath("//input[@name='login']")).click();
-	//	    }
 
 
 	@AfterMethod

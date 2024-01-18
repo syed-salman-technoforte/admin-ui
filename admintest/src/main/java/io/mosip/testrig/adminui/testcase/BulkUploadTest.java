@@ -100,7 +100,7 @@ public class BulkUploadTest extends BaseClass {
     Commons.click(test,driver,By.xpath("//button[@id='createButton']"));
     Commons.click(test,driver,By.id("confirmpopup")); 
     test.log(Status.INFO, "Click on FileUploaded");
-    
+    Thread.sleep(2000);
     String divText=driver.findElement(By.xpath("//div[@class='mat-dialog-content']//div")).getText();
     String divTextArr[]=divText.split(":");
     logger.info(divTextArr[1].trim());

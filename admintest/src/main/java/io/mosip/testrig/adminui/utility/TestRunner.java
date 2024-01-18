@@ -65,6 +65,7 @@ public class TestRunner {
 	//	MockSMTPListener mockSMTPListener = new MockSMTPListener();
 	//	mockSMTPListener.run();
 		startTestRunner();
+		DBManager.clearMasterDbData();
 	}
 
 	
