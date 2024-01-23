@@ -111,8 +111,9 @@ public class ConfigManager {
 	private static String Langcode = "langcode";
 	private static String DummyData = "dummyData";//loginlang
 	private static String Loginlang = "loginlang";
+	private static String Testcases = "testcases";
 	
-	
+	private static String testcases;
 	private static String loginlang;
 	private static String langcode;
 	private static String docker;
@@ -352,7 +353,13 @@ public class ConfigManager {
 		
 		loginlang =System.getenv(Loginlang) == null ? propsKernel.getProperty(Loginlang) : System.getenv(Loginlang);
 		propsKernel.setProperty(Loginlang, loginlang);
+		
+		testcases =System.getenv(Testcases) == null ? propsKernel.getProperty(Testcases) : System.getenv(Testcases);
+		propsKernel.setProperty(Testcases, testcases);
 
+	}
+	public static String gettestcases() {
+		return testcases;
 	}
 	public static String getloginlang() {
 		return loginlang;

@@ -1,4 +1,5 @@
 package io.mosip.testrig.adminui.testcase;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +30,7 @@ import io.mosip.testrig.adminui.utility.BaseClass;
 import io.mosip.testrig.adminui.utility.Commons;
 public class CenterTypeTest extends BaseClass{
    @Test(groups = "CT")
-  public void centerTypeCRUD() {
+  public void centerTypeCRUD() throws IOException {
 	   test=extent.createTest("DeviceTest", "verify Login");
 	  String idCenterTypeCard="admin/masterdata/center-type/view";
    

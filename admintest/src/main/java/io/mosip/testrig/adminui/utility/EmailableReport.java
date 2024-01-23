@@ -1,10 +1,12 @@
 package io.mosip.testrig.adminui.utility;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
 import java.text.NumberFormat;
@@ -140,9 +142,13 @@ public class EmailableReport implements IReporter {
 		Properties properties = new Properties();
 		try (InputStream is = EmailableReport.class.getClassLoader().getResourceAsStream("git.properties")) {
 			properties.load(is);
+			Process process = Runtime.getRuntime().exec("git rev-parse --abbrev-ref HEAD");
 
+			// Read the output of the command
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+			String branch = reader.readLine();
 			return "Commit Id is: " + properties.getProperty("git.commit.id.abbrev") + " & Branch Name is:"
-					+ properties.getProperty("git.branch");
+			+ branch;
 
 		} catch (IOException io) {
 			logger.error(io.getMessage());

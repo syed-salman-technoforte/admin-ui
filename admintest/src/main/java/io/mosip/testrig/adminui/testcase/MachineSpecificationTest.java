@@ -1,4 +1,5 @@
 package io.mosip.testrig.adminui.testcase;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +32,7 @@ import io.mosip.testrig.adminui.utility.Commons;
 public class MachineSpecificationTest extends BaseClass{
  
   @Test(groups = "MS")
-  public void machineSpecCRUD() {
+  public void machineSpecCRUD() throws IOException {
 	  String machinespec="admin/masterdata/machine-specs/view"; 
 	  test=extent.createTest("MachineSpecificationTest", "verify Login");
     Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));

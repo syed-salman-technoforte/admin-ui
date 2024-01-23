@@ -1,4 +1,5 @@
 package io.mosip.testrig.adminui.testcase;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -30,7 +31,7 @@ import io.mosip.testrig.adminui.utility.Commons;
 
 public class DocumentCategoriesTest extends BaseClass{
   @Test(groups = "DOC")
-  public void documentCategoriesCRUD() {
+  public void documentCategoriesCRUD() throws IOException {
 	  test=extent.createTest("DocumentCategoriesTest", "verify Login");
 	   String documentCategories="admin/masterdata/document-categories/view";
     Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));

@@ -1,4 +1,5 @@
 package io.mosip.testrig.adminui.testcase;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +30,7 @@ public class DeviceSpecificationTest extends BaseClass{
  
  
   @Test(groups = "DS")
-  public void deviceSpecCRUD() {
+  public void deviceSpecCRUD() throws IOException {
 	  test=extent.createTest("DeviceSpecificationTest", "verify Login");
 	  String devicespec="admin/masterdata/device-specs/view";
 	    
