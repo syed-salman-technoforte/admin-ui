@@ -111,7 +111,7 @@ public class ConfigManager {
 	private static String Langcode = "langcode";
 	private static String DummyData = "dummyData";//loginlang
 	private static String Loginlang = "loginlang";
-	private static String Testcases = "testcases";
+	private static String Testcases = "adminscenariosToExecute";
 	
 	private static String testcases;
 	private static String loginlang;
