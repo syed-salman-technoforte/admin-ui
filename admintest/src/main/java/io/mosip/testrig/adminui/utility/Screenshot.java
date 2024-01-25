@@ -22,46 +22,34 @@ public class Screenshot  {
 		TakesScreenshot ss=(TakesScreenshot)driver;
 		File so=ss.getScreenshotAs(OutputType.FILE);
 		String path=null;
-		
-		if (TestRunner.checkRunType().equalsIgnoreCase("JAR")) {
-			path = TestRunner.getResourcePath()+"/Screenshots/"+System.currentTimeMillis()+".png";
-		} else if (TestRunner.checkRunType().equalsIgnoreCase("IDE")) {
-
-        
-			path = System.getProperty("user.dir") + System.getProperty("path.config")+ "/Screenshots/"+System.currentTimeMillis()+".png";
-		}
-		
-		
-		
-		
-	//	String path=System.getProperty("user.dir")+"/resources/Screenshots/"+System.currentTimeMillis()+".png";
+		path = TestRunner.getResourcePath()+ "/Screenshots/"+System.currentTimeMillis()+".png";
 		File des=new File(path);
 		FileHandler.copy(so, des);
 		FileInputStream fis=new FileInputStream(path);
 		byte[] bytes =IOUtils.toByteArray(fis);
 		String base64img=Base64.getEncoder().encodeToString(bytes);
-		
-		
+
+
 		return base64img;
-		
+
 	}
-//	public static String Attachfile(ExtentTest test,String n) {
-//		try {
-//			String up="C:\\Users\\jayesh.kharode\\Downloads\\"+n+".csv";
-//			Workbook workbook = new Workbook(up);
-//			String path=System.getProperty("user.dir")+"/Export/"+System.currentTimeMillis()+".png";
-//			 workbook.save(path);
-//			 FileInputStream fis=new FileInputStream(path);
-//				byte[] bytes =IOUtils.toByteArray(fis);
-//				String base64img=Base64.getEncoder().encodeToString(bytes);
-//				return base64img;
-//			
-//		}catch(Exception e) {
-//			test.fail(e.getMessage());
-//		}
-//		
-//		return null;
-//		
-//	}
-//
+	//	public static String Attachfile(ExtentTest test,String n) {
+	//		try {
+	//			String up="C:\\Users\\jayesh.kharode\\Downloads\\"+n+".csv";
+	//			Workbook workbook = new Workbook(up);
+	//			String path=System.getProperty("user.dir")+"/Export/"+System.currentTimeMillis()+".png";
+	//			 workbook.save(path);
+	//			 FileInputStream fis=new FileInputStream(path);
+	//				byte[] bytes =IOUtils.toByteArray(fis);
+	//				String base64img=Base64.getEncoder().encodeToString(bytes);
+	//				return base64img;
+	//			
+	//		}catch(Exception e) {
+	//			test.fail(e.getMessage());
+	//		}
+	//		
+	//		return null;
+	//		
+	//	}
+	//
 }

@@ -1,4 +1,5 @@
 package io.mosip.testrig.adminui.testcase;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +33,7 @@ public class DynamicFieldTest extends BaseClass{
  
  
   @Test(groups = "DF")
-  public void dynamicFieldCRUD() {
+  public void dynamicFieldCRUD() throws IOException {
 	 
 	  test=extent.createTest("DynamicFieldTest", "verify Login");
     Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));

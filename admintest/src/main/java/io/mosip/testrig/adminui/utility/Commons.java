@@ -15,6 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
@@ -35,7 +36,7 @@ public class Commons  extends BaseClass{
 	   return dtf.format(now);
 	  }
 	
-	public  static void filter(ExtentTest test,WebDriver driver, By by,String data) {
+	public  static void filter(ExtentTest test,WebDriver driver, By by,String data) throws IOException {
 		try {
 		logger.info("Inside Filter " + by + data);
 		Commons.click(test,driver, By.id("Filter")); 
@@ -45,6 +46,8 @@ public class Commons  extends BaseClass{
 		Commons.click(test,driver, By.id("applyTxt"));
 		}
 		catch (Exception e) {
+			Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
@@ -58,7 +61,7 @@ public class Commons  extends BaseClass{
 		}
 	}
 	
-	public  static void filterCenter(ExtentTest test,WebDriver driver, By by,String data) {
+	public  static void filterCenter(ExtentTest test,WebDriver driver, By by,String data) throws IOException {
 		logger.info("Inside filterCenter " + by + data);
 		try {
 		Commons.click(test,driver, By.id("Filter")); 
@@ -68,6 +71,8 @@ public class Commons  extends BaseClass{
 		Commons.click(test,driver, By.id("applyTxt")); 
 		}
 		catch (Exception e) {
+			Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 			logger.info(e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
@@ -80,7 +85,7 @@ public class Commons  extends BaseClass{
 
 		}
 	}
-	public  static void click(ExtentTest test,WebDriver driver, By by) {
+	public  static void click(ExtentTest test,WebDriver driver, By by) throws IOException {
 		logger.info("Clicking " + by );
 		try {
 			(new WebDriverWait(driver, 20)).until(ExpectedConditions.elementToBeClickable(by));
@@ -88,11 +93,15 @@ public class Commons  extends BaseClass{
 			driver.findElement(by).click();
 			Thread.sleep(500);
 		}catch (StaleElementReferenceException sere) {
+			Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 			// simply retry finding the element in the refreshed DOM
 			logger.error( sere.getMessage());
 			driver.findElement(by).click();
 		}
 		catch (TimeoutException toe) {
+	//		Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 			logger.error( toe.getMessage());
 			driver.findElement(by).click();
 			try {
@@ -104,6 +113,8 @@ public class Commons  extends BaseClass{
 			}
 			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 		} catch (Exception e) {
+		//	Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 			logger.error( e.getMessage());
 			try {
 				test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
@@ -130,7 +141,7 @@ public class Commons  extends BaseClass{
 		
 	}
   
-	public static void enter(ExtentTest test,WebDriver driver, By by,String value) {
+	public static void enter(ExtentTest test,WebDriver driver, By by,String value) throws IOException {
 		logger.info("Entering " + by +value);
 			try {
 				(new WebDriverWait(driver, 20)).until(ExpectedConditions.visibilityOfElementLocated(by));
@@ -143,14 +154,20 @@ public class Commons  extends BaseClass{
 					e.printStackTrace();
 				}
 			}catch (StaleElementReferenceException sere) {
+				Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 				// simply retry finding the element in the refreshed DOM
 				driver.findElement(by).sendKeys(value);
 			}
 			catch (TimeoutException toe) {
+				Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 				driver.findElement(by).sendKeys(value);
 				logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 			} 
 			catch (Exception e) {
+				Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
@@ -164,7 +181,7 @@ public class Commons  extends BaseClass{
 			
 	}
 	
-	public static void dropdown(ExtentTest test,WebDriver driver, By by)
+	public static void dropdown(ExtentTest test,WebDriver driver, By by) throws IOException
 	  {
 		logger.info("Selecting DropDown Index Zero Value " + by );
 		  
@@ -183,6 +200,8 @@ public class Commons  extends BaseClass{
 				e.printStackTrace();
 			}
 		 }catch (Exception e) {
+				Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {
@@ -290,7 +309,7 @@ public class Commons  extends BaseClass{
 
 	
 
-	public static void deactivate(ExtentTest test,WebDriver driver) {
+	public static void deactivate(ExtentTest test,WebDriver driver) throws IOException {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Deactivate0")); 
 
@@ -299,7 +318,7 @@ public class Commons  extends BaseClass{
 		 logger.info("Click deactivate and Confirm");
 	}
 
-	public static void activate(ExtentTest test,WebDriver driver) {
+	public static void activate(ExtentTest test,WebDriver driver) throws IOException {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Activate0")); 
 
@@ -339,7 +358,7 @@ public class Commons  extends BaseClass{
 		}
 	}
 
-	public static void editRes(ExtentTest test,WebDriver driver,String data,By by) {
+	public static void editRes(ExtentTest test,WebDriver driver,String data,By by) throws IOException {
 		try {
 		Commons.click(test,driver,By.id("ellipsis-button0"));
 		Commons.click(test,driver, By.id("Edit0")); 
@@ -358,6 +377,8 @@ public class Commons  extends BaseClass{
 
 			 logger.info("Click Edit and Confirm" + by + data);
 			 }catch (Exception e) {
+					Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 				 logger.info(e.getMessage());
 					try {
 						test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
@@ -404,14 +425,14 @@ public class Commons  extends BaseClass{
 		}
 	}
 	
-	public static void create(ExtentTest test,WebDriver driver) {
+	public static void create(ExtentTest test,WebDriver driver) throws IOException {
 		
 		Commons.click(test,driver, By.xpath("//button[@id='createButton']")); 
 		Commons.click(test,driver, By.id("confirmmessagepopup")); 
 		
 		logger.info("Click create");
 	}
-	public static void createRes(ExtentTest test,WebDriver driver) {
+	public static void createRes(ExtentTest test,WebDriver driver) throws IOException {
 		 try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -424,7 +445,7 @@ public class Commons  extends BaseClass{
 		logger.info("Click and confirm");
 	}
 
-	public static void decommission(ExtentTest test,WebDriver driver) {
+	public static void decommission(ExtentTest test,WebDriver driver) throws IOException {
 		 Commons.click(test,driver,By.id("ellipsis-button0"));
 		    Commons.click(test,driver,By.id("Decommission0"));
 
@@ -444,7 +465,7 @@ public class Commons  extends BaseClass{
 	return preappend;
 	  }
 	
-	public static void calendar(String date) {
+	public static void calendar(String date) throws IOException {
 		String a=date.replaceAll("/","");
 	    String mon="";
 	    if(a.substring(0,2).equals("10")) {
@@ -474,6 +495,8 @@ public class Commons  extends BaseClass{
 	  Thread.sleep(500);
 	  Commons.click(test,driver,By.xpath("//*[text()='"+day+"']"));
 	    }catch (Exception e) {
+			Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			logger.info(e.getMessage());

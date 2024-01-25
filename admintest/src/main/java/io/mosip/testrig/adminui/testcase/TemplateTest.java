@@ -1,4 +1,5 @@
 package io.mosip.testrig.adminui.testcase;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -32,7 +33,7 @@ public class TemplateTest extends BaseClass{
  
  
   @Test(groups = "T")
-  public void templateCRUD() {
+  public void templateCRUD() throws IOException {
 	  String templatesid="admin/masterdata/templates/view";
 	  test=extent.createTest("TemplateTest", "verify Login");
     Commons.click(test,driver,By.xpath("//a[@href='#/admin/masterdata']"));
