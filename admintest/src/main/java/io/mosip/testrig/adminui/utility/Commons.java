@@ -100,7 +100,7 @@ public class Commons  extends BaseClass{
 			driver.findElement(by).click();
 		}
 		catch (TimeoutException toe) {
-			Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+	//		Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
 
 			logger.error( toe.getMessage());
 			driver.findElement(by).click();
@@ -113,7 +113,7 @@ public class Commons  extends BaseClass{
 			}
 			logger.info( "Element identified by " + by.toString() + " was not clickable after 20 seconds");
 		} catch (Exception e) {
-			Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+		//	Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
 
 			logger.error( e.getMessage());
 			try {
@@ -181,7 +181,7 @@ public class Commons  extends BaseClass{
 			
 	}
 	
-	public static void dropdown(ExtentTest test,WebDriver driver, By by)
+	public static void dropdown(ExtentTest test,WebDriver driver, By by) throws IOException
 	  {
 		logger.info("Selecting DropDown Index Zero Value " + by );
 		  
@@ -200,6 +200,8 @@ public class Commons  extends BaseClass{
 				e.printStackTrace();
 			}
 		 }catch (Exception e) {
+				Reporter.log("<p><img src='data:image/png;base64," + Screenshot.ClickScreenshot(driver) + "' width='900' height='450'/></p>");
+
 				try {
 					test.fail(e.getMessage(), MediaEntityBuilder.createScreenCaptureFromBase64String(Screenshot.ClickScreenshot(driver)).build());
 				} catch (IOException e1) {

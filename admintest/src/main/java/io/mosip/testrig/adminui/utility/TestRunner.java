@@ -62,8 +62,8 @@ public class TestRunner {
 			XmlClass templateCRUD = new XmlClass("io.mosip.testrig.adminui.testcase.TemplateTest");
 
 			List<XmlClass> classes = new ArrayList<>();
-			String[] a=ConfigManager.gettestcases().split(",");
-			for(String test:a) {
+			String[] Scenarioname=ConfigManager.gettestcases().split(",");
+			for(String test:Scenarioname) {
 				if(test.equals("blocklistedwordsCRUD"))
 					classes.add(blocklistedwordsCRUD);
 
