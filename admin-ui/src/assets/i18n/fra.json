@@ -499,6 +499,11 @@
             "title": "Service temporairement indisponible",
             "message": "Le service n'est pas prêt à traiter la demande. Veuillez essayer après un certain temps.",
             "btnTxt": "D'accord"
+        },
+        "offLine": {
+            "title": "Pas d'Internet",
+            "message": "La page ne peut pas être chargée",
+            "btnTxt": "D'accord"
         }
 	},
 	"validationMessages": {
@@ -1460,7 +1465,6 @@
 		"KER-MSD-238": "Une erreur s'est produite lors de la mise à jour du modèle",
 		"KER-MSD-096": "Une erreur s'est produite lors de la suppression du modèle",
 		"KER-MSD-232": "Une erreur s'est produite lors de l'insertion des détails du format de fichier modèle",
-		"KER-MSD-046": "Modèle introuvable.",
 		"KER-MSD-093": "Une erreur s'est produite lors de la mise à jour du modèle",
 		"KER-MSD-236": "Une erreur s'est produite lors de la suppression du modèle",
 		"KER-MSD-125": "Impossible de supprimer la dépendance trouvée.",
@@ -1550,7 +1554,6 @@
 		"ADM-PKT-010": "Exception d'analyse JSON lors de l'analyse de la réponse",
 		"ADM-PKT-090": "Une erreur s'est produite lors de la récupération de la mise à jour de l'état du paquet",
 		"KER-MSD-999": "Entrée de requête invalide",
-		"KER-MSD-319": "Entrée de requête invalide",
 		"ADMN-LRID-001": "Impossible de trouver le débarras perdu..",
 		"ADM-BLK-004": "Les formats pris en charge sont uniquement des fichiers csv",
 		"ADM-BLK-005": "Le format pris en charge n'est qu'un fichier zip",
