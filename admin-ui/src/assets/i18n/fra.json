@@ -1433,7 +1433,7 @@
 		"KER-MSD-037": "Une erreur s'est produite lors de la récupération des mappages du centre d'enregistrement, de la machine et de l'utilisateur",
 		"KER-MSD-038": "Centre d'enregistrement, Machine, Utilisateur non trouvé",
 		"KER-MSD-039": "Format de date invalide",
-		"KER-MSD-319": "Entrée de requête invalide",
+		"KER-MSD-319": "Entrée de demande invalide",
 		"KER-MSD-500": "Erreur serveur interne",
 		"KER-MSD-998": "Déjà activé ou désactivé",
 		"KER-MSD-997": "Identifiant non valide transmis pour la langue principale",
