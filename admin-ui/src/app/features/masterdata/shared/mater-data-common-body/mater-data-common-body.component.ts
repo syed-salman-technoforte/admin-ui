@@ -34,6 +34,7 @@ import defaultJson from "../../../../../assets/i18n/default.json";
 import { HeaderService } from 'src/app/core/services/header.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuditService } from 'src/app/core/services/audit.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-mater-data-common-body',
@@ -100,6 +101,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
     private headerService: HeaderService,
     private translateService: TranslateService,
     private auditService: AuditService, 
+    private dateAdapter: DateAdapter<Date>
   ) { 
     this.tomorrow.setDate(this.tomorrow.getDate() + 1);
   }
@@ -109,6 +111,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
     this.url = this.router.url.split('/')[3];
     this.fieldsCount = 0;
     this.primaryLangCode = this.headerService.getUserPreferredLanguage();
+    this.dateAdapter.setLocale(defaultJson.keyboardMapping[this.primaryLangCode]);
     console.log("this.primaryLangCode>>>"+this.primaryLangCode);
     console.log("config>>>"+defaultJson.languages["ara"].name);
     /*if(url === "blocklisted-words"){      
