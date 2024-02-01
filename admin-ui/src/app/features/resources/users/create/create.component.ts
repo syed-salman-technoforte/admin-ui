@@ -335,9 +335,7 @@ export class CreateComponent{
       response => {
         if (response.response.data) {
           this.data = response.response.data;
-          if(url === "zoneuser"){
           this.primaryData = {userId:this.data[0].userId, zone:this.data[0].zoneCode, regCenterId:this.data[0].regCenterId, name: this.data[0].userName};
-          }
           this.initializeheader();
         } else {
           let message = "";
