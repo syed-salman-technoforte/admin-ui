@@ -124,7 +124,24 @@ export class AuthInterceptor implements HttpInterceptor {
                   });
                 });
             } else {
-              if (err.url.includes('validateToken')) {
+              if(err.statusText === 'Unknown Error'){
+                this.translateService
+                .getTranslation(this.appService.getConfig().primaryLangCode)
+                .subscribe(response => {
+                  this.errorMessages = response.errorPopup;
+                  this.dialog.open(DialogComponent, {
+                    width: '868px',
+                    height: '190px',
+                    data: {
+                      case: 'MESSAGE',
+                      title: this.errorMessages.offLine.title,
+                      message: this.errorMessages.offLine.message,
+                      btnTxt: this.errorMessages.offLine.btnTxt
+                    },
+                    disableClose: true
+                  });
+                });
+              }else if (err.url.includes('validateToken')) {
                 this.translateService
                 .getTranslation(this.appService.getConfig().primaryLangCode)
                 .subscribe(response => {

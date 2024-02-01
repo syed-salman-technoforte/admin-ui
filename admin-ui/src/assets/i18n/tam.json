@@ -474,6 +474,11 @@
             "title": "சேவை தற்காலிகமாக கிடைக்கவில்லை",
             "message": "கோரிக்கையை கையாள சேவை தயாராக இல்லை. சிறிது நேரம் கழித்து முயற்சிக்கவும்.",
             "btnTxt": "சரி"
+        },
+        "offLine": {
+            "title": "Sin internet",
+            "message": "La página no se puede cargar",
+            "btnTxt": "De acuerdo"
         }
     },
     "validationMessages": {

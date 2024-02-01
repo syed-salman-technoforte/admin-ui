@@ -480,6 +480,11 @@
             "title": "Service Temporarily Unavailable",
             "message": "Service is not ready to handle the request. Kindly try after sometime.",
             "btnTxt": "Ok"
+        },
+        "offLine": {
+            "title": "No internet",
+            "message": "Page cannot be loaded",
+            "btnTxt": "Ok"
         }
     },
     "validationMessages": {
