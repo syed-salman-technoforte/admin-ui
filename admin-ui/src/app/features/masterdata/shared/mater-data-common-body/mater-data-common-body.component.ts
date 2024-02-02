@@ -88,6 +88,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
   isPrimaryLangRTL:boolean = false;
   searchResult:any;
   appConfig:any;
+  confirmationPopupMessage:any;
 
   constructor(
     private location: Location,
@@ -142,6 +143,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
       .subscribe(response => {
         this.popupMessages = response;
         this.serverError = response.serverError;
+        this.confirmationPopupMessage = response.masterData.centerType;
       });
     let supportedLanguages = this.appConfigService.getConfig()['supportedLanguages'].split(',');
     let self = this;
@@ -779,7 +781,7 @@ export class MaterDataCommonBodyComponent implements OnInit {
         this.showErrorPopup(mandatoryFieldLabel[i]+this.popupMessages.genericerror.fieldNameValidation);
         break;
       }else if(len === (i+1)){
-        self.executeAPI();
+        this.isCreateForm ? this.showConfirmationMsg("create") : this.showConfirmationMsg("update")
       }
     }
   }
@@ -1130,6 +1132,26 @@ export class MaterDataCommonBodyComponent implements OnInit {
       }
     });
     return dialogRef;
+  }
+
+  showConfirmationMsg(type:any){
+    let data = {};
+    data = {
+      case: 'CONFIRMATION',
+      title: this.confirmationPopupMessage[type].title,
+      message: this.confirmationPopupMessage[type].message,
+      yesBtnTxt: this.confirmationPopupMessage[type].yesBtnText,
+      noBtnTxt: this.confirmationPopupMessage[type].noBtnText
+    };
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '650px',
+      data
+    });
+    dialogRef.afterClosed().subscribe(response => {
+      if (response) {
+        this.executeAPI();
+      } else if (!response) {}
+    });
   }
 
   showErrorPopup(message: string) {
