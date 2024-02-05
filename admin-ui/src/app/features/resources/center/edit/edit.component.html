@@ -104,10 +104,10 @@
               </mat-form-field>
             </div>
             <mat-card-actions class="action-buttons">
-              <button id="createButton" mat-raised-button *ngIf="data.length != 0" (click)="submitPrimaryPanel()">
+              <button [disabled]="!primaryForm.dirty" id="createButton" mat-raised-button *ngIf="data.length != 0" (click)="submitPrimaryPanel()">
                 {{ "center.update" | translate }}
               </button>
-              <button id="createButton" mat-raised-button *ngIf="data.length == 0" (click)="submitPrimaryPanel()">
+              <button [disabled]="!primaryForm.dirty" id="createButton" mat-raised-button *ngIf="data.length == 0" (click)="submitPrimaryPanel()">
                 {{ "center.create" | translate }}
               </button>
               <button mat-raised-button id="cancel" (click)="cancel()" *ngIf="secondaryLang">
@@ -257,11 +257,11 @@
               </mat-form-field>
             </div>
             <mat-card-actions class="action-buttons">
-              <button id="createButton" mat-raised-button *ngIf="showUpdateButton"
+              <button [disabled]="!secondaryForm.dirty" id="createButton" mat-raised-button *ngIf="showUpdateButton"
                 (click)="submitSecondaryPanel()">
                 {{ "center.update" | translate }}
               </button>
-              <button id="createButton" mat-raised-button *ngIf="!showUpdateButton"
+              <button [disabled]="!secondaryForm.dirty"  id="createButton" mat-raised-button *ngIf="!showUpdateButton"
                 (click)="submitSecondaryPanel()">
                 {{ "center.create" | translate }}
               </button>
@@ -687,7 +687,7 @@
           <mat-divider [vertical]="true" [inset]="true"></mat-divider>
         </mat-card-content>
         <mat-card-actions class="action-buttons">
-          <button id="createButton" mat-raised-button (click)="submitCommonPanel()">
+          <button [disabled]="!commonForm.dirty" id="createButton" mat-raised-button (click)="submitCommonPanel()">
             {{ "center.update" | translate }}
           </button>
           <button mat-raised-button id="cancel" (click)="cancel()">
