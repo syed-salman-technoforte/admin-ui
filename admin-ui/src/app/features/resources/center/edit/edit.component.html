@@ -117,7 +117,7 @@
           </div>
           <mat-divider [vertical]="true" [inset]="true"></mat-divider>
           <div *ngIf="secondaryLanguageLabels && secondaryLang && showSecondaryForm" [formGroup]="secondaryForm"
-            [ngClass]="isSecondaryLangRTL ? 'secondary-form' : 'secondary-form-ltr'">
+            [ngClass]="isSecondaryLangRTL ? 'secondary-form' : 'secondary-form-ltr'" [dir]="isSecondaryLangRTL ? 'rtl' : 'ltl'">
             <mat-form-field style="padding-bottom: 10px;">
               <mat-label><b>{{ "center.selectLanguage" | translate }}</b></mat-label>
               <mat-select formControlName="selectLanguage" id="selectLanguage"
