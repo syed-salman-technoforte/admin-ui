@@ -412,7 +412,7 @@
                 </div>
             </div>
             <mat-divider [vertical]="true" [inset]="true"></mat-divider>
-              <div *ngIf="showSecondaryForm" class="secondary-form" [ngStyle]="{'text-align': (secondaryLang==='ara') ? 'right' : 'left'}">
+              <div *ngIf="showSecondaryForm" class="secondary-form" [dir]="secondaryLang==='ara' ? 'rtl' : 'ltr'">
                 <mat-form-field style="padding-bottom: 10px;">
                 <mat-label><b>{{ "center.selectLanguage" | translate }}</b></mat-label>
                   <mat-select
@@ -428,7 +428,7 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-                <strong class="title" [ngStyle]="isPrimaryLangRTL ? {'float':'right'} : {'float':'left'}">{{ secondaryLangDisplay }}</strong>
+                <strong class="title" >{{ secondaryLangDisplay }}</strong>
                 <span
                   *ngIf="!disableForms"
                   matTooltip="{{languageNames['keyboard-tooltip'] | translate }}"
